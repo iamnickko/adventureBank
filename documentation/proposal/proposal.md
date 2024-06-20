@@ -1,17 +1,18 @@
 # AdventureBank /TrailMaster / TrailSeeker or something...
 
-### the WHAT
+#### the WHAT
 Gear Inventory Management and Adventure Planning. Construct a packing checklist for your next adventure by creating a new 'adventure' and populate fields with your trusty existing gear. Add new items of gear to your inventory to be used.
+
 
 ---
 
-### the WHO
+#### the WHO
 Target demographic will be the adventure gear heads who have 7 different pieces of gear suitable for the same task, but they'd explain in great detail to you why they're great at their specific purpose. They likely have a garage or room dedicated to storing gear in meticulously arranged boxes.
 
-### the WHY
+#### the WHY
 This application will solve the problem of having to physically rummage around trying to piece together the perfect kit setup for their next outdoor adventure. Instead they can create a new 'adventure' online and assign the required gear to it from their database of existing gear. They can review what they have at a glance and refer to the list as a packing list.
 
-### the HOW
+#### the HOW
 
 Core Features:
 
@@ -36,7 +37,7 @@ Possible additional features or optimistic long term improvements to add to docu
 
 ---
 
- ## User Interface
+ ### User Interface
 
  This UI will be built using React.js to render components populated with data received from the backend service API.
 
@@ -50,7 +51,7 @@ Possible additional features or optimistic long term improvements to add to docu
 
 ---
 
-## Architecture:
+### Architecture:
 
 This project will be built on Node.js, using the Express.js framework. It will help implement a model-controller-service pattern to create a RESTful API.
 
@@ -58,7 +59,7 @@ This project will be built on Node.js, using the Express.js framework. It will h
 
 ---
 
-## [RESTful Routing](#restful-routing)
+### [RESTful Routing](#restful-routing)
 
 [/auth](#auth) <br/>
 [/user - admin permission only](#user---admin-permission-only) <br/>
@@ -112,7 +113,7 @@ This project will be built on Node.js, using the Express.js framework. It will h
 
 ---
 
-## Technologies: 
+### Technologies: 
 Frontend:
 - React.js
 - React-Router-Dom
@@ -140,6 +141,10 @@ Backend:
 
 ---
 
-## Deployment
+### Deployment
 I already have an account with Vercel so will deploy my frontend there.
 The backend will be hosted on Render.
+
+### Miro Evidence
+
+![alt text](images/miro-evidence.JPG)
