@@ -1,9 +1,15 @@
-import "./App.css";
+import { Routes, Route } from "react-router-dom";
+
+import Auth from "./pages/Auth";
+import Header from "./components/Header";
 
 function App() {
   return (
     <>
-      <h1>test</h1>
+      <Header />
+      <Routes>
+        <Route path="/auth" element={<Auth />} />
+      </Routes>
     </>
   );
 }
