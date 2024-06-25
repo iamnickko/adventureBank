@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 
 export default class Server {
@@ -28,6 +29,8 @@ export default class Server {
     });
 
     this.#app.use(express.json());
+
+    this.#app.use(cors());
 
     this.#router.getRouter().forEach((router) => {
       this.#app.use(router.getRouterPath(), router.getRouter());

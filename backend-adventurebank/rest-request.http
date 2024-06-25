@@ -5,8 +5,8 @@ POST http://{{host}}:{{port}}/auth/register
 content-type: application/json
 
 {
-    "username": "traillord",
-    "email": "traillord@gmail.com",
+    "username": "GraniteChicken",
+    "email": "granite@chicken.com",
     "password": "Password123!"
 }
 
@@ -16,7 +16,7 @@ POST http://{{host}}:{{port}}/auth/login
 content-type: application/json
 
 {
-    "email" : "traillord@gmail.com",
+    "email" : "granite@chicken.com",
     "password": "Password123!"
 }
 
@@ -26,12 +26,19 @@ POST http://{{host}}:{{port}}/auth/register
 content-type: application/json
 
 {
-    "username": "hikingbuddy",
-    "email": "buddy@gmail.com",
+    "username": "LimestoneFish",
+    "email": "limestone@fish.com",
     "password": "Password123!"
 }
 
 ###
 
+POST http://{{host}}:{{port}}/auth/login
+content-type: application/json
 
+{
+    "email" : "limestone@fish.com",
+    "password": "Password123!"
+}
 
+###
