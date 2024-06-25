@@ -29,11 +29,9 @@ export default class AuthServices {
         throw new Error("Invalid credentials.");
       }
 
-      const accessToken = jwt.sign(
-        { id: dbUser._id, role: dbUser.role },
-        process.env.JWT_SECRET,
-        { expiresIn: 86400 }
-      );
+      const accessToken = jwt.sign({ id: dbUser._id }, process.env.JWT_SECRET, {
+        expiresIn: 86400,
+      });
       return { accessToken, dbUser };
     } catch (error) {
       throw new Error("An error ocurred during the login process.");
