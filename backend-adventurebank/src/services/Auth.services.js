@@ -11,7 +11,14 @@ export default class AuthServices {
         ...others,
         password: hashedPassword,
       });
-      return createdUser;
+      const accessToken = jwt.sign(
+        { id: createdUser._id },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: 86400,
+        }
+      );
+      return { accessToken, createdUser };
     } catch (error) {
       throw new Error(error);
     }

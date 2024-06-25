@@ -1,7 +1,7 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const login = async (formInput) => {
-  console.log(formInput);
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_APP_API}/auth/login`,
@@ -10,16 +10,22 @@ export const login = async (formInput) => {
         password: formInput.password,
       }
     );
+    Cookies.set("user", response.data.accessToken, {
+      expires: 86400,
+    });
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);
   }
 };
 
+export const logout = () => {
+  Cookies.remove("user");
+};
+
 export const register = async (formInput) => {
-  console.log(formInput);
   try {
-    const response = axios.post(
+    const response = await axios.post(
       `${import.meta.env.VITE_APP_API}/auth/register`,
       {
         username: formInput.username,
@@ -27,8 +33,17 @@ export const register = async (formInput) => {
         password: formInput.password,
       }
     );
+    Cookies.set("user", response.data.accessToken, {
+      expires: 86400,
+    });
     return response.data;
   } catch (error) {
+    console.log(error);
     throw new Error(error.response.data.message);
   }
+};
+
+export const checkForCookie = () => {
+  const userCookie = Cookies.get("user");
+  if (userCookie) return true;
 };

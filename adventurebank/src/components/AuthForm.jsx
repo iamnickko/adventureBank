@@ -1,18 +1,28 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login, register } from "../utils/auth.services";
 
-const AuthForm = ({ isLoggingIn }) => {
+const AuthForm = ({ isLoggingIn, setHasCookie }) => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-    {
-      isLoggingIn
-        ? login({ email, password })
-        : register({ username, email, password });
+    try {
+      if (isLoggingIn) {
+        await login({ email, password });
+      } else {
+        await register({ username, email, password });
+      }
+      setHasCookie(true);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
     }
   };
 

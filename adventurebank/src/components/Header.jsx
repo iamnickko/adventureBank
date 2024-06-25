@@ -1,6 +1,12 @@
 import { NavLink } from "react-router-dom";
+import { logout } from "../utils/auth.services";
 
-const Header = () => {
+const Header = ({ hasCookie, setHasCookie }) => {
+  const onClickHandler = () => {
+    logout();
+    setHasCookie(false);
+  };
+
   return (
     <header className="pb-7">
       <nav className="flex justify-between">
@@ -17,13 +23,21 @@ const Header = () => {
             </li>
           </ul>
         </span>
-        <span>
-          <ul>
-            <li>
-              <NavLink to="/auth">Register/Login</NavLink>
-            </li>
-          </ul>
-        </span>
+        {hasCookie && (
+          <span>
+            <button onClick={onClickHandler}>Logout</button>
+          </span>
+        )}
+
+        {!hasCookie && (
+          <span>
+            <ul>
+              <li>
+                <NavLink to="/auth">Register/Login</NavLink>
+              </li>
+            </ul>
+          </span>
+        )}
       </nav>
     </header>
   );

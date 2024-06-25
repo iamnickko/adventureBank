@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import AuthForm from "../components/AuthForm";
 
-const Auth = () => {
+const Auth = ({ setHasCookie }) => {
   const [searchParams] = useSearchParams();
   const isLoggingIn = searchParams.get("mode") === "login";
 
@@ -10,7 +10,7 @@ const Auth = () => {
       <h1 className="text-3xl text-center">
         {isLoggingIn ? "Login" : "Register"}
       </h1>
-      <AuthForm isLoggingIn={isLoggingIn} />
+      <AuthForm isLoggingIn={isLoggingIn} setHasCookie={setHasCookie} />
     </>
   );
 };
