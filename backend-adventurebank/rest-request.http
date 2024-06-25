@@ -1,0 +1,22 @@
+@host = localhost
+@port = 4000
+
+POST http://{{host}}:{{port}}/auth/register
+content-type: application/json
+
+{
+    "username": "traillord",
+    "email": "traillord@gmail.com",
+    "password": "Password123!"
+}
+
+###
+POST http://{{host}}:{{port}}/auth/login
+
+{
+    "email" : "traillord@gmail.com",
+    "password": "Password123!"
+}
+
+###
+

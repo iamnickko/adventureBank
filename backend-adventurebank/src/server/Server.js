@@ -6,10 +6,12 @@ export default class Server {
   #host;
   #server;
   #router;
-  constructor(port, host) {
+
+  constructor(port, host, router) {
     this.#app = express();
     this.#port = port;
     this.#host = host;
+    this.#router = router;
   }
 
   getApp = () => {
@@ -23,6 +25,12 @@ export default class Server {
           this.#server.address().port
         }`
       );
+    });
+
+    this.#app.use(express.json());
+
+    this.#router.getRouter().forEach((router) => {
+      this.#app.use(router.getRouterPath(), router.getRouter());
     });
   };
 
