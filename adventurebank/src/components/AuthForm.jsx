@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { login } from "../utils/auth.services";
+import { login, register } from "../utils/auth.services";
 
 const AuthForm = ({ isLoggingIn }) => {
   const [username, setUsername] = useState("");
@@ -9,7 +9,11 @@ const AuthForm = ({ isLoggingIn }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    login({ email, password });
+    {
+      isLoggingIn
+        ? login({ email, password })
+        : register({ username, email, password });
+    }
   };
 
   return (
