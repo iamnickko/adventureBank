@@ -17,9 +17,11 @@ export default class AuthRouter {
   #initialise = () => {
     this.#router.post(
       "/register",
-      [ValidationMiddleware.checkDuplicate],
+      [ValidationMiddleware.checkDuplicateEmail],
       this.#controller.register
     );
+
+    this.#router.post("/login", this.#controller.login);
   };
 
   getRouter = () => {

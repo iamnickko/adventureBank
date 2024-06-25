@@ -1,7 +1,7 @@
 import User from "../models/User.model.js";
 
 export default class ValidationMiddleware {
-  static checkDuplicate = async (req, res, next) => {
+  static checkDuplicateEmail = async (req, res, next) => {
     try {
       const userToCheck = await User.findOne({ email: req.body.email });
       if (userToCheck) {

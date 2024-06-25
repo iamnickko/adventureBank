@@ -12,6 +12,16 @@ content-type: application/json
 
 ###
 
+POST http://{{host}}:{{port}}/auth/login
+content-type: application/json
+
+{
+    "email" : "traillord@gmail.com",
+    "password": "Password123!"
+}
+
+###
+
 POST http://{{host}}:{{port}}/auth/register
 content-type: application/json
 
@@ -22,12 +32,7 @@ content-type: application/json
 }
 
 ###
-POST http://{{host}}:{{port}}/auth/login
 
-{
-    "email" : "traillord@gmail.com",
-    "password": "Password123!"
-}
 
 ###
 
