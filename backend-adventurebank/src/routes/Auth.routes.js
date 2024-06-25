@@ -1,5 +1,6 @@
 import { Router } from "express";
 import AuthController from "../controllers/Auth.controller.js";
+import ValidationMiddleware from "../middleware/Validation.middleware.js";
 
 export default class AuthRouter {
   #path;
@@ -14,7 +15,11 @@ export default class AuthRouter {
   }
 
   #initialise = () => {
-    this.#router.post("/register", this.#controller.register);
+    this.#router.post(
+      "/register",
+      [ValidationMiddleware.checkDuplicate],
+      this.#controller.register
+    );
   };
 
   getRouter = () => {
