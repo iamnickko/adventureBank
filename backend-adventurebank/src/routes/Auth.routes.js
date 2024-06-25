@@ -14,10 +14,6 @@ export default class AuthRouter {
   }
 
   #initialise = () => {
-    // this.#router.post("/register", (req, res) => {
-    //   res.status(200).json({ message: "All good!" });
-    // });
-
     this.#router.post("/register", this.#controller.register);
   };
 

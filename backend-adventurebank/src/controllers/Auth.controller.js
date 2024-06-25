@@ -8,7 +8,6 @@ export default class AuthController {
   }
 
   register = async (req, res) => {
-    console.log(req.body);
     try {
       const newUser = await this.#service.register(req.body);
       res.status(201).json(newUser);

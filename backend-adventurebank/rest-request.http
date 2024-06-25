@@ -11,6 +11,17 @@ content-type: application/json
 }
 
 ###
+
+POST http://{{host}}:{{port}}/auth/register
+content-type: application/json
+
+{
+    "username": "hikingbuddy",
+    "email": "buddy@gmail.com",
+    "password": "Password123!"
+}
+
+###
 POST http://{{host}}:{{port}}/auth/login
 
 {
