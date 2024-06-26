@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { logout } from "../utils/auth.services";
 
-const Header = ({ hasCookie, setHasCookie }) => {
+const Header = ({ hasCookie, setHasCookie, isAdmin, setIsAdmin }) => {
   const onClickHandler = () => {
     logout();
     setHasCookie(false);
+    setIsAdmin(false);
   };
 
   return (
@@ -25,6 +26,7 @@ const Header = ({ hasCookie, setHasCookie }) => {
         </span>
         {hasCookie && (
           <span>
+            {hasCookie && isAdmin && <NavLink to="/admin">Admin</NavLink>}
             <button onClick={onClickHandler}>Logout</button>
           </span>
         )}
@@ -33,7 +35,8 @@ const Header = ({ hasCookie, setHasCookie }) => {
           <span>
             <ul>
               <li>
-                <NavLink to="/auth">Register/Login</NavLink>
+                <NavLink to="/auth?mode=register">Register</NavLink>/
+                <NavLink to="/auth?mode=login">Login</NavLink>
               </li>
             </ul>
           </span>

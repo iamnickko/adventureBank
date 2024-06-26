@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 
 import { checkForCookie } from "./utils/auth.services";
 
+import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 
 function App() {
   const [hasCookie, setHasCookie] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (checkForCookie()) {
@@ -18,7 +20,12 @@ function App() {
 
   return (
     <>
-      <Header hasCookie={hasCookie} setHasCookie={setHasCookie} />
+      <Header
+        hasCookie={hasCookie}
+        setHasCookie={setHasCookie}
+        isAdmin={isAdmin}
+        setIsAdmin={setIsAdmin}
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -30,6 +37,10 @@ function App() {
               <Auth setHasCookie={setHasCookie} />
             )
           }
+        />
+        <Route
+          path="/admin"
+          element={isAdmin ? <Admin /> : <Navigate to="/" />}
         />
       </Routes>
     </>

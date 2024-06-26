@@ -47,3 +47,12 @@ export const checkForCookie = () => {
   const userCookie = Cookies.get("user");
   if (userCookie) return true;
 };
+
+export const authHeader = () => {
+  const user = Cookies.get("user");
+  if (user) {
+    return { "X-Access-Token": user };
+  } else {
+    return {};
+  }
+};

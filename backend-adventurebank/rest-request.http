@@ -1,5 +1,16 @@
 @host = localhost
 @port = 4000
+POST http://{{host}}:{{port}}/auth/register
+content-type: application/json
+
+{
+    "username": "RangerRick",
+    "email": "ranger@rick.com",
+    "password": "Password123!",
+    "role": "admin"
+}
+
+###
 
 POST http://{{host}}:{{port}}/auth/register
 content-type: application/json
@@ -42,3 +53,5 @@ content-type: application/json
 }
 
 ###
+
+GET http://{{host}}:{{port}}/admin
