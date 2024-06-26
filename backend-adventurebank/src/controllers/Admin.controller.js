@@ -15,4 +15,15 @@ export default class AdminController {
       res.status(500).json({ message: error.message });
     }
   };
+
+  deleteUser = async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    try {
+      const deleteUser = await this.#service.deleteUser(id);
+      res.status(200).json(deleteUser);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
 }

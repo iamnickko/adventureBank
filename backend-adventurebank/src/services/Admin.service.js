@@ -14,4 +14,19 @@ export default class AdminService {
       );
     }
   };
+
+  deleteUser = async (id) => {
+    console.log(id);
+    try {
+      const userToDelete = await User.findByIdAndDelete({ _id: id });
+      if (!userToDelete) {
+        throw new Error("There is no such user.");
+      }
+      return userToDelete;
+    } catch (error) {
+      throw new Error(
+        "An unexpected error ocurred whilst trying to delete user."
+      );
+    }
+  };
 }

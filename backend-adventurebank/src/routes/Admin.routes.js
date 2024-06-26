@@ -20,6 +20,11 @@ export default class AdminRoutes {
       [AuthMiddleware.verifyToken, AuthMiddleware.isAdmin],
       this.#controller.getAllUsers
     );
+    this.#router.delete(
+      "/user/:id",
+      [AuthMiddleware.verifyToken, AuthMiddleware.isAdmin],
+      this.#controller.deleteUser
+    );
   };
 
   getRouterPath = () => {
