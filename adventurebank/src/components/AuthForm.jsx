@@ -36,6 +36,7 @@ const AuthForm = ({ isLoggingIn, setHasCookie }) => {
               type="text"
               name="username"
               id="username"
+              autoComplete="username"
               placeholder="e.g. hikingChamp1337"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               onChange={(e) => setUsername(e.target.value)}
@@ -49,6 +50,7 @@ const AuthForm = ({ isLoggingIn, setHasCookie }) => {
             type="email"
             name="email"
             id="email"
+            autoComplete="email"
             placeholder="email@domain.com"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             onChange={(e) => setEmail(e.target.value)}
@@ -61,6 +63,7 @@ const AuthForm = ({ isLoggingIn, setHasCookie }) => {
             type="password"
             name="password"
             id="password"
+            autoComplete={isLoggingIn ? "current-password" : "new-password"}
             placeholder="password"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             onChange={(e) => setPassword(e.target.value)}
