@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.model.js";
 
-export default class AuthServices {
+export default class AuthService {
   register = async (newUser) => {
     const { password, ...others } = newUser;
     try {

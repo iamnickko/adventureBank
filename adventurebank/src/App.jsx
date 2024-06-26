@@ -10,7 +10,7 @@ import Home from "./pages/Home";
 
 function App() {
   const [hasCookie, setHasCookie] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
 
   useEffect(() => {
     if (checkForCookie()) {

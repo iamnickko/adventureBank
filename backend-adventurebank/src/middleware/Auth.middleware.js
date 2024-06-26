@@ -4,7 +4,6 @@ import User from "../models/User.model.js";
 export default class AuthMiddleware {
   static verifyToken = async (req, res, next) => {
     let token = req.headers["x-access-token"];
-    console.log("TOKEN IS:", token);
     if (!token) {
       res
         .status(403)
@@ -15,14 +14,12 @@ export default class AuthMiddleware {
         res.status(401).json({ message: "Unauthorised." });
       }
       req.userId = decoded.id;
-      console.log(req.userId);
       next();
     });
   };
 
   static isAdmin = async (req, res, next) => {
     const user = await User.findById(req.userId);
-    console.log(user);
     if (!user) {
       res.status(500).json({ message: "Unexpected error." });
     }

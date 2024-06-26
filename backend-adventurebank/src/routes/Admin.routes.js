@@ -1,15 +1,16 @@
 import { Router } from "express";
 import AuthMiddleware from "../middleware/Auth.middleware.js";
+import AdminController from "../controllers/Admin.controller.js";
 
 export default class AdminRoutes {
   #path;
   #router;
   #controller;
 
-  constructor() {
+  constructor(controller = new AdminController()) {
     this.#path = "/admin";
     this.#router = new Router();
-    // this.#controller = controller;
+    this.#controller = controller;
     this.#initialise();
   }
 
@@ -17,9 +18,7 @@ export default class AdminRoutes {
     this.#router.get(
       "/",
       [AuthMiddleware.verifyToken, AuthMiddleware.isAdmin],
-      (req, res) => {
-        res.status(200).json({ message: "All good from /admin GET" });
-      }
+      this.#controller.getAllUsers
     );
   };
 

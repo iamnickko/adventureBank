@@ -1,9 +1,9 @@
-import AuthServices from "../services/Auth.services.js";
+import AuthService from "../services/Auth.service.js";
 
 export default class AuthController {
   #service;
 
-  constructor(service = new AuthServices()) {
+  constructor(service = new AuthService()) {
     this.#service = service;
   }
 
