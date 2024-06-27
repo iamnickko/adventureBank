@@ -79,8 +79,16 @@ describe("Integration Tests:", () => {
   });
 
   describe("POST requests to /register on AuthRouter:", () => {
-    it("should", () => {
-      expect(true).to.be.true;
+    it("should respond with a 201 status code when registering a valid user.", async () => {
+      const response = await request.post("/auth/register").send(newUser);
+      expect(response.status).to.equal(201);
+    });
+
+    it("should response with a 422 status code when invalid data is sent", async () => {
+      const response = await request
+        .post("/auth/register")
+        .send("invalid data");
+      expect(response.status).to.equal(422);
     });
   });
 });
