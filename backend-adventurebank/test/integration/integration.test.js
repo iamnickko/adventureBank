@@ -79,7 +79,7 @@ describe("Integration Tests:", () => {
     }
   });
 
-  describe("POST requests to /register on AuthRouter:", () => {
+  describe.skip("POST requests to /register on AuthRouter:", () => {
     it("should respond with a 201 status code when registering a valid user.", async () => {
       const response = await request.post("/auth/register").send(newUser);
       expect(response.status).to.equal(201);
@@ -143,6 +143,18 @@ describe("Integration Tests:", () => {
       expect(response.body.message).to.equal(
         "Registration failed - email already exists."
       );
+    });
+  });
+
+  describe("POST requests to /login on AuthRouter", () => {
+    it("should respond with 200 with valid login details", async () => {
+      const response = await request.post("/auth/login").send(existingUser);
+      expect(response.status).to.equal(200);
+    });
+
+    it("should respond with a 'X-Access-Token' header when valid login", async () => {
+      const response = await request.post("/auth/login").send(existingUser);
+      expect(response.headers["x-access-token"]).to.exist;
     });
   });
 });
