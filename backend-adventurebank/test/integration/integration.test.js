@@ -247,6 +247,32 @@ describe("Integration Tests:", () => {
           .set("x-access-token", token);
         expect(response.status).to.equal(200);
       });
+
+      it("should respond with 401 status code if no token", async () => {
+        const response = await request.delete(
+          `/admin/user/${userToDelete._id}`
+        );
+        expect(response.status).to.equal(401);
+      });
+
+      it("should respond with 403 status code if token is invalid", async () => {
+        token = "invalid";
+        const response = await request
+          .delete(`/admin/user/${userToDelete._id}`)
+          .set("x-access-token", token);
+        expect(response.status).to.equal(403);
+      });
+
+      it("should respond with 403 status code if role is 'user'", async () => {
+        const notAdmin = await User.findOne({ email: existingUser.email });
+        token = jwt.sign({ id: notAdmin._id }, process.env.JWT_SECRET, {
+          expiresIn: 86400,
+        });
+        const response = await request
+          .delete(`/admin/user/${userToDelete._id}`)
+          .set("x-access-token", token);
+        expect(response.status).to.equal(403);
+      });
     });
   });
 });
