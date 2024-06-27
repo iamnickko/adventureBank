@@ -8,7 +8,7 @@ export default class ValidationMiddleware {
       if (userToCheck) {
         res
           .status(400)
-          .json({ message: "Registration failed - email already exists" });
+          .json({ message: "Registration failed - email already exists." });
       } else {
         next();
       }

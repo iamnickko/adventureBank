@@ -135,5 +135,14 @@ describe("Integration Tests:", () => {
       expect(response.status).to.equal(422);
       expect(response.body).to.have.property("message");
     });
+
+    it("should respond with a 400 status code if email already exists - prevent duplicate", async () => {
+      const response = await request.post("/auth/register").send(existingUser);
+      expect(response.status).to.equal(400);
+      expect(response.body).to.have.property("message");
+      expect(response.body.message).to.equal(
+        "Registration failed - email already exists."
+      );
+    });
   });
 });
