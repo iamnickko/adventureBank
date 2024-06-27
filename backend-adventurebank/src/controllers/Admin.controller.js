@@ -18,7 +18,6 @@ export default class AdminController {
 
   deleteUser = async (req, res) => {
     const { id } = req.params;
-    console.log(id);
     try {
       const deleteUser = await this.#service.deleteUser(id);
       res.status(200).json(deleteUser);

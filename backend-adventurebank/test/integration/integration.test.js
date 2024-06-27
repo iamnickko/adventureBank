@@ -83,147 +83,170 @@ describe("Integration Tests:", () => {
     }
   });
 
-  describe.skip("POST requests to /register on AuthRouter:", () => {
-    it("should respond with a 201 status code when registering a valid user.", async () => {
-      const response = await request.post("/auth/register").send(newUser);
-      expect(response.status).to.equal(201);
+  describe("AuthRouter Tests", () => {
+    describe.skip("POST requests to /register on AuthRouter:", () => {
+      it("should respond with a 201 status code when registering a valid user.", async () => {
+        const response = await request.post("/auth/register").send(newUser);
+        expect(response.status).to.equal(201);
+      });
+
+      it("should response with a 422 status code when invalid data is sent", async () => {
+        const response = await request
+          .post("/auth/register")
+          .send("invalid data");
+        expect(response.status).to.equal(422);
+      });
+
+      it("should respond with a 500 status code when there is an error", async () => {
+        await database.close();
+        const response = await request.post("/auth/register").send(newUser);
+        expect(response.status).to.equal(500);
+      });
+
+      it("should respond with a 422 status code if invalid data - missing email", async () => {
+        const invalidUser = { ...newUser, email: null };
+        const response = await request.post("/auth/register").send(invalidUser);
+        expect(response.status).to.equal(422);
+        expect(response.body).to.have.property("message");
+      });
+
+      it("should respond with a 422 status code if invalid data - missing password", async () => {
+        const invalidUser = { ...newUser, password: null };
+        const response = await request.post("/auth/register").send(invalidUser);
+        expect(response.status).to.equal(422);
+        expect(response.body).to.have.property("message");
+      });
+
+      it("should respond with a 422 status code if invalid data - no email key", async () => {
+        const invalidUser = { ...newUser };
+        delete invalidUser.email;
+        const response = await request.post("/auth/register").send(invalidUser);
+        expect(response.status).to.equal(422);
+        expect(response.body).to.have.property("message");
+      });
+
+      it("should respond with a 422 status code if invalid data - no password key", async () => {
+        const invalidUser = { ...newUser };
+        delete invalidUser.password;
+        const response = await request.post("/auth/register").send(invalidUser);
+        expect(response.status).to.equal(422);
+        expect(response.body).to.have.property("message");
+      });
+
+      it("should respond with a 422 status code if invalid data - with additional key", async () => {
+        const invalidUser = { ...newUser, injection: "bad person code" };
+        delete invalidUser.password;
+        const response = await request.post("/auth/register").send(invalidUser);
+        expect(response.status).to.equal(422);
+        expect(response.body).to.have.property("message");
+      });
+
+      it("should respond with a 400 status code if email already exists - prevent duplicate", async () => {
+        const response = await request
+          .post("/auth/register")
+          .send(existingUser);
+        expect(response.status).to.equal(400);
+        expect(response.body).to.have.property("message");
+        expect(response.body.message).to.equal(
+          "Registration failed - email already exists."
+        );
+      });
     });
 
-    it("should response with a 422 status code when invalid data is sent", async () => {
-      const response = await request
-        .post("/auth/register")
-        .send("invalid data");
-      expect(response.status).to.equal(422);
-    });
+    describe.skip("POST requests to /login on AuthRouter", () => {
+      const { email, password } = existingUser;
 
-    it("should respond with a 500 status code when there is an error", async () => {
-      await database.close();
-      const response = await request.post("/auth/register").send(newUser);
-      expect(response.status).to.equal(500);
-    });
+      it("should respond with 200 with valid login details", async () => {
+        const response = await request.post("/auth/login").send(existingUser);
+        expect(response.status).to.equal(200);
+      });
 
-    it("should respond with a 422 status code if invalid data - missing email", async () => {
-      const invalidUser = { ...newUser, email: null };
-      const response = await request.post("/auth/register").send(invalidUser);
-      expect(response.status).to.equal(422);
-      expect(response.body).to.have.property("message");
-    });
+      it("should respond with a 'X-Access-Token' header when valid login", async () => {
+        const response = await request.post("/auth/login").send(existingUser);
+        expect(response.headers["x-access-token"]).to.exist;
+      });
 
-    it("should respond with a 422 status code if invalid data - missing password", async () => {
-      const invalidUser = { ...newUser, password: null };
-      const response = await request.post("/auth/register").send(invalidUser);
-      expect(response.status).to.equal(422);
-      expect(response.body).to.have.property("message");
-    });
+      it("should return a 401 status code if email does not exist in the database", async () => {
+        const nonExistentUserLogin = {
+          email: "nonexistent@example.com",
+          password: "Password456!",
+        };
+        const response = await request
+          .post("/auth/login")
+          .send(nonExistentUserLogin);
+        expect(response.status).to.equal(401);
+        expect(response.body.message).to.equal("Invalid credentials.");
+      });
 
-    it("should respond with a 422 status code if invalid data - no email key", async () => {
-      const invalidUser = { ...newUser };
-      delete invalidUser.email;
-      const response = await request.post("/auth/register").send(invalidUser);
-      expect(response.status).to.equal(422);
-      expect(response.body).to.have.property("message");
-    });
+      it("should return a 401 status code if email is invalid", async () => {
+        const invalidLogin = { email: "wrong", password: "Password456!" };
+        const response = await request.post("/auth/login").send(invalidLogin);
+        expect(response.status).to.equal(401);
+        expect(response.body.message).to.equal("Invalid credentials.");
+      });
 
-    it("should respond with a 422 status code if invalid data - no password key", async () => {
-      const invalidUser = { ...newUser };
-      delete invalidUser.password;
-      const response = await request.post("/auth/register").send(invalidUser);
-      expect(response.status).to.equal(422);
-      expect(response.body).to.have.property("message");
-    });
-
-    it("should respond with a 422 status code if invalid data - with additional key", async () => {
-      const invalidUser = { ...newUser, injection: "bad person code" };
-      delete invalidUser.password;
-      const response = await request.post("/auth/register").send(invalidUser);
-      expect(response.status).to.equal(422);
-      expect(response.body).to.have.property("message");
-    });
-
-    it("should respond with a 400 status code if email already exists - prevent duplicate", async () => {
-      const response = await request.post("/auth/register").send(existingUser);
-      expect(response.status).to.equal(400);
-      expect(response.body).to.have.property("message");
-      expect(response.body.message).to.equal(
-        "Registration failed - email already exists."
-      );
+      it("should return a 401 status code if password is invalid", async () => {
+        const invalidLogin = { email, password: "invalid" };
+        const response = await request.post("/auth/login").send(invalidLogin);
+        expect(response.status).to.equal(401);
+        expect(response.body.message).to.equal("Invalid credentials.");
+      });
     });
   });
 
-  describe.skip("POST requests to /login on AuthRouter", () => {
-    const { email, password } = existingUser;
-
-    it("should respond with 200 with valid login details", async () => {
-      const response = await request.post("/auth/login").send(existingUser);
-      expect(response.status).to.equal(200);
-    });
-
-    it("should respond with a 'X-Access-Token' header when valid login", async () => {
-      const response = await request.post("/auth/login").send(existingUser);
-      expect(response.headers["x-access-token"]).to.exist;
-    });
-
-    it("should return a 401 status code if email does not exist in the database", async () => {
-      const nonExistentUserLogin = {
-        email: "nonexistent@example.com",
-        password: "Password456!",
-      };
-      const response = await request
-        .post("/auth/login")
-        .send(nonExistentUserLogin);
-      expect(response.status).to.equal(401);
-      expect(response.body.message).to.equal("Invalid credentials.");
-    });
-
-    it("should return a 401 status code if email is invalid", async () => {
-      const invalidLogin = { email: "wrong", password: "Password456!" };
-      const response = await request.post("/auth/login").send(invalidLogin);
-      expect(response.status).to.equal(401);
-      expect(response.body.message).to.equal("Invalid credentials.");
-    });
-
-    it("should return a 401 status code if password is invalid", async () => {
-      const invalidLogin = { email, password: "invalid" };
-      const response = await request.post("/auth/login").send(invalidLogin);
-      expect(response.status).to.equal(401);
-      expect(response.body.message).to.equal("Invalid credentials.");
-    });
-  });
-
-  describe("GET requests to /admin on AdminRouter", () => {
+  describe("AdminRouter tests", () => {
     let adminUser;
     let token;
+    let userToDelete;
 
     beforeEach(async () => {
       adminUser = await User.findOne({ email: "ranger@rick.com" });
       token = jwt.sign({ id: adminUser._id }, process.env.JWT_SECRET, {
         expiresIn: 86400,
       });
+      userToDelete = await User.findOne({ email: existingUser.email });
     });
 
-    it("should return 200 status when role is 'admin'", async () => {
-      const response = await request.get("/admin").set("x-access-token", token);
-      expect(response.status).to.equal(200);
-    });
-
-    it("should return a 401 status code if no token", async () => {
-      const response = await request.get("/admin");
-      expect(response.status).to.equal(401);
-    });
-
-    it("should return a 403 if the token is invalid", async () => {
-      token = "invalid";
-      const response = await request.get("/admin").set("x-access-token", token);
-      expect(response.status).to.equal(403);
-    });
-
-    it("should return a 403 if the token is valid but role is 'user'", async () => {
-      const notAdmin = await User.findOne({ email: existingUser.email });
-      token = jwt.sign({ id: notAdmin._id }, process.env.JWT_SECRET, {
-        expiresIn: 86400,
+    describe.skip("GET requests to /admin on AdminRouter", () => {
+      it("should return 200 status when role is 'admin'", async () => {
+        const response = await request
+          .get("/admin")
+          .set("x-access-token", token);
+        expect(response.status).to.equal(200);
       });
-      const response = await request.get("/admin").set("x-access-token", token);
-      expect(response.status).to.equal(403);
+
+      it("should return a 401 status code if no token", async () => {
+        const response = await request.get("/admin");
+        expect(response.status).to.equal(401);
+      });
+
+      it("should return a 403 if the token is invalid", async () => {
+        token = "invalid";
+        const response = await request
+          .get("/admin")
+          .set("x-access-token", token);
+        expect(response.status).to.equal(403);
+      });
+
+      it("should return a 403 if the token is valid but role is 'user'", async () => {
+        const notAdmin = await User.findOne({ email: existingUser.email });
+        token = jwt.sign({ id: notAdmin._id }, process.env.JWT_SECRET, {
+          expiresIn: 86400,
+        });
+        const response = await request
+          .get("/admin")
+          .set("x-access-token", token);
+        expect(response.status).to.equal(403);
+      });
+    });
+
+    describe("DELETE requests to /admin/user/ on AdminRouter", () => {
+      it("should respond with 200 status code when role is admin", async () => {
+        const response = await request
+          .delete(`/admin/user/${userToDelete._id}`)
+          .set("x-access-token", token);
+        expect(response.status).to.equal(200);
+      });
     });
   });
 });
