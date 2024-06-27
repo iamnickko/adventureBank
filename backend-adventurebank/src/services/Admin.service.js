@@ -16,7 +16,6 @@ export default class AdminService {
   };
 
   deleteUser = async (id) => {
-    console.log(id);
     try {
       const userToDelete = await User.findByIdAndDelete({ _id: id });
       if (!userToDelete) {

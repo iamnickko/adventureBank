@@ -205,5 +205,25 @@ describe("Integration Tests:", () => {
       const response = await request.get("/admin").set("x-access-token", token);
       expect(response.status).to.equal(200);
     });
+
+    it("should return a 401 status code if no token", async () => {
+      const response = await request.get("/admin");
+      expect(response.status).to.equal(401);
+    });
+
+    it("should return a 403 if the token is invalid", async () => {
+      token = "invalid";
+      const response = await request.get("/admin").set("x-access-token", token);
+      expect(response.status).to.equal(403);
+    });
+
+    it("should return a 403 if the token is valid but role is 'user'", async () => {
+      const notAdmin = await User.findOne({ email: existingUser.email });
+      token = jwt.sign({ id: notAdmin._id }, process.env.JWT_SECRET, {
+        expiresIn: 86400,
+      });
+      const response = await request.get("/admin").set("x-access-token", token);
+      expect(response.status).to.equal(403);
+    });
   });
 });
