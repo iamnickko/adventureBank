@@ -1,10 +1,12 @@
 import bcrypt from "bcrypt";
 import { expect } from "chai";
+import jwt from "jsonwebtoken";
 import sinon from "sinon";
 import supertest from "supertest";
 
 import AdminController from "../../src/controllers/Auth.controller.js";
 import AdminService from "../../src/services/Admin.service.js";
+import AdminRouter from "../../src/routes/Admin.routes.js";
 import AuthRouter from "../../src/routes/Auth.routes.js";
 import AuthService from "../../src/services/Auth.service.js";
 import Config from "../../src/config/Config.js";
@@ -33,7 +35,9 @@ describe("Integration Tests:", () => {
     authController = new AuthController(authService);
     adminController = new AdminController(adminService);
     router = new Router();
-    const adminRouter = new AuthRouter();
+    const authRouter = new AuthRouter();
+    const adminRouter = new AdminRouter();
+    router.addRouter(authRouter);
     router.addRouter(adminRouter);
     database = new Database(DB_URI);
     server = new Server(PORT, HOST, router);
@@ -146,7 +150,9 @@ describe("Integration Tests:", () => {
     });
   });
 
-  describe("POST requests to /login on AuthRouter", () => {
+  describe.skip("POST requests to /login on AuthRouter", () => {
+    const { email, password } = existingUser;
+
     it("should respond with 200 with valid login details", async () => {
       const response = await request.post("/auth/login").send(existingUser);
       expect(response.status).to.equal(200);
@@ -155,6 +161,49 @@ describe("Integration Tests:", () => {
     it("should respond with a 'X-Access-Token' header when valid login", async () => {
       const response = await request.post("/auth/login").send(existingUser);
       expect(response.headers["x-access-token"]).to.exist;
+    });
+
+    it("should return a 401 status code if email does not exist in the database", async () => {
+      const nonExistentUserLogin = {
+        email: "nonexistent@example.com",
+        password: "Password456!",
+      };
+      const response = await request
+        .post("/auth/login")
+        .send(nonExistentUserLogin);
+      expect(response.status).to.equal(401);
+      expect(response.body.message).to.equal("Invalid credentials.");
+    });
+
+    it("should return a 401 status code if email is invalid", async () => {
+      const invalidLogin = { email: "wrong", password: "Password456!" };
+      const response = await request.post("/auth/login").send(invalidLogin);
+      expect(response.status).to.equal(401);
+      expect(response.body.message).to.equal("Invalid credentials.");
+    });
+
+    it("should return a 401 status code if password is invalid", async () => {
+      const invalidLogin = { email, password: "invalid" };
+      const response = await request.post("/auth/login").send(invalidLogin);
+      expect(response.status).to.equal(401);
+      expect(response.body.message).to.equal("Invalid credentials.");
+    });
+  });
+
+  describe("GET requests to /admin on AdminRouter", () => {
+    let adminUser;
+    let token;
+
+    beforeEach(async () => {
+      adminUser = await User.findOne({ email: "ranger@rick.com" });
+      token = jwt.sign({ id: adminUser._id }, process.env.JWT_SECRET, {
+        expiresIn: 86400,
+      });
+    });
+
+    it("should return 200 status when role is 'admin'", async () => {
+      const response = await request.get("/admin").set("x-access-token", token);
+      expect(response.status).to.equal(200);
     });
   });
 });

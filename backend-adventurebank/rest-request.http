@@ -12,6 +12,20 @@ content-type: application/json
 
 ###
 
+POST http://{{host}}:{{port}}/auth/login
+content-type: application/json
+
+{
+    "email" : "ranger@rick.com",
+    "password": "Password123!"
+}
+
+###
+
+GET http://{{host}}:{{port}}/admin
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2IzNmE5OTdiYWE1MTcxNTVmOGYxMSIsImlhdCI6MTcxOTQ5OTYzMiwiZXhwIjoxNzE5NTg2MDMyfQ.kbxxWopti9aHkLwXVKYBY3uaeE-LYAMAEpMEjVvBzt8
+###
+
 POST http://{{host}}:{{port}}/auth/register
 content-type: application/json
 
@@ -52,6 +66,3 @@ content-type: application/json
     "password": "Password123!"
 }
 
-###
-
-GET http://{{host}}:{{port}}/admin
