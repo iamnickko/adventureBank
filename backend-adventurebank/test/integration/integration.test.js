@@ -111,5 +111,29 @@ describe("Integration Tests:", () => {
       expect(response.status).to.equal(422);
       expect(response.body).to.have.property("message");
     });
+
+    it("should respond with a 422 status code if invalid data - no email key", async () => {
+      const invalidUser = { ...newUser };
+      delete invalidUser.email;
+      const response = await request.post("/auth/register").send(invalidUser);
+      expect(response.status).to.equal(422);
+      expect(response.body).to.have.property("message");
+    });
+
+    it("should respond with a 422 status code if invalid data - no password key", async () => {
+      const invalidUser = { ...newUser };
+      delete invalidUser.password;
+      const response = await request.post("/auth/register").send(invalidUser);
+      expect(response.status).to.equal(422);
+      expect(response.body).to.have.property("message");
+    });
+
+    it("should respond with a 422 status code if invalid data - with additional key", async () => {
+      const invalidUser = { ...newUser, injection: "bad person code" };
+      delete invalidUser.password;
+      const response = await request.post("/auth/register").send(invalidUser);
+      expect(response.status).to.equal(422);
+      expect(response.body).to.have.property("message");
+    });
   });
 });
