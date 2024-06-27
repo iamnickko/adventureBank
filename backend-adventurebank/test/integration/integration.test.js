@@ -48,6 +48,7 @@ describe("Integration Tests:", () => {
   });
 
   beforeEach(async () => {
+    await database.connect();
     try {
       await User.deleteMany();
       console.log("Database successfully cleared.");
@@ -89,6 +90,12 @@ describe("Integration Tests:", () => {
         .post("/auth/register")
         .send("invalid data");
       expect(response.status).to.equal(422);
+    });
+
+    it("should respond with a 500 status code when there is an error", async () => {
+      await database.close();
+      const response = await request.post("/auth/register").send(newUser);
+      expect(response.status).to.equal(500);
     });
   });
 });
