@@ -97,5 +97,19 @@ describe("Integration Tests:", () => {
       const response = await request.post("/auth/register").send(newUser);
       expect(response.status).to.equal(500);
     });
+
+    it("should respond with a 422 status code if invalid data - missing email", async () => {
+      const invalidUser = { ...newUser, email: null };
+      const response = await request.post("/auth/register").send(invalidUser);
+      expect(response.status).to.equal(422);
+      expect(response.body).to.have.property("message");
+    });
+
+    it("should respond with a 422 status code if invalid data - missing password", async () => {
+      const invalidUser = { ...newUser, password: null };
+      const response = await request.post("/auth/register").send(invalidUser);
+      expect(response.status).to.equal(422);
+      expect(response.body).to.have.property("message");
+    });
   });
 });
