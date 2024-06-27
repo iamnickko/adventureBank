@@ -84,7 +84,7 @@ describe("Integration Tests:", () => {
   });
 
   describe("AuthRouter Tests", () => {
-    describe.skip("POST requests to /register on AuthRouter:", () => {
+    describe("POST requests to /register on AuthRouter:", () => {
       it("should respond with a 201 status code when registering a valid user.", async () => {
         const response = await request.post("/auth/register").send(newUser);
         expect(response.status).to.equal(201);
@@ -153,7 +153,7 @@ describe("Integration Tests:", () => {
       });
     });
 
-    describe.skip("POST requests to /login on AuthRouter", () => {
+    describe("POST requests to /login on AuthRouter", () => {
       const { email, password } = existingUser;
 
       it("should respond with 200 with valid login details", async () => {
@@ -207,7 +207,7 @@ describe("Integration Tests:", () => {
       userToDelete = await User.findOne({ email: existingUser.email });
     });
 
-    describe.skip("GET requests to /admin on AdminRouter", () => {
+    describe("GET requests to /admin on AdminRouter", () => {
       it("should return 200 status when role is 'admin'", async () => {
         const response = await request
           .get("/admin")
