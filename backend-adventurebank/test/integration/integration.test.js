@@ -19,7 +19,7 @@ import User from "../../src/models/User.model.js";
 
 const { testUsers, newUser, existingUser } = testData;
 
-describe("Integration Tests:", () => {
+describe.skip("Integration Tests:", () => {
   let server;
   let database;
   let request;

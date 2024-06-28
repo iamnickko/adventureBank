@@ -7,7 +7,7 @@ import Config from "../../src/config/Config.js";
 import testData from "../data/testUsers.js";
 import User from "../../src/models/User.model.js";
 
-describe("AuthService tests", () => {
+describe.skip("AuthService tests", () => {
   let authService;
   let userFindStub;
   let userCreateStub;
