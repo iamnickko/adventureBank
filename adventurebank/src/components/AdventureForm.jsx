@@ -4,9 +4,14 @@ const AdventureForm = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log("got clicked");
+  };
+
   return (
     <div className="mt-8 max-w-md mx-auto">
-      <form className="grid grid-cols-1 gap-6 mb-5">
+      <form onSubmit={onSubmitHandler} className="grid grid-cols-1 gap-6 mb-5">
         <label htmlFor="name" className="block">
           <span className="text-gray-700">Name Your Adventure</span>
           <input
