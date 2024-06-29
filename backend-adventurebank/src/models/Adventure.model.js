@@ -10,7 +10,7 @@ const adventureSchema = new Schema(
       type: String,
       required: true,
     },
-    user: {
+    userId: {
       type: Types.ObjectId,
       ref: "User",
       required: true,
