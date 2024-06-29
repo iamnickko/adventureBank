@@ -2,7 +2,6 @@ import Adventure from "../models/Adventure.model.js";
 
 export default class AdventureService {
   createAdventure = async (newAdventure) => {
-    console.log("AdventureService: ", newAdventure);
     try {
       const adventure = await Adventure.create(newAdventure);
       return adventure;

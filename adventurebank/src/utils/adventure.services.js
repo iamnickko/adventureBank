@@ -1,10 +1,14 @@
 import axios from "axios";
 import { authHeader } from "./auth.services";
 
-export const createAdventure = async () => {
+export const createAdventure = async (formInput) => {
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_APP_API}/adventures`,
+      {
+        name: formInput.name,
+        description: formInput.description,
+      },
       { headers: authHeader() }
     );
     return response.data;

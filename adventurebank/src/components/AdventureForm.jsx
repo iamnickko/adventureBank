@@ -1,14 +1,17 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import Card from "../components/ui/Card";
+import { createAdventure } from "../utils/adventure.services";
 
 const AdventureForm = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log("got clicked");
+    createAdventure({ name, description });
+    navigate("/adventures");
   };
 
   return (

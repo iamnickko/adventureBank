@@ -8,8 +8,11 @@ export default class AdventureController {
   }
 
   createAdventure = async (req, res) => {
+    const adventureToCreate = { userId: req.userId, ...req.body };
     try {
-      const newAdventure = await this.#service.createAdventure(req.body);
+      const newAdventure = await this.#service.createAdventure(
+        adventureToCreate
+      );
       res.status(201).json(newAdventure);
     } catch (error) {
       res.status(500).json({ message: error.message });
