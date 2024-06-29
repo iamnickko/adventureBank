@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import Card from "../components/ui/Card";
+
 const AdventureForm = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -10,7 +12,7 @@ const AdventureForm = () => {
   };
 
   return (
-    <div className="mt-8 max-w-md mx-auto">
+    <Card className="max-w-md mx-auto">
       <form onSubmit={onSubmitHandler} className="grid grid-cols-1 gap-6 mb-5">
         <label htmlFor="name" className="block">
           <span className="text-gray-700">Name Your Adventure</span>
@@ -40,7 +42,7 @@ const AdventureForm = () => {
           Create Adventure
         </button>
       </form>
-    </div>
+    </Card>
   );
 };
 export default AdventureForm;
