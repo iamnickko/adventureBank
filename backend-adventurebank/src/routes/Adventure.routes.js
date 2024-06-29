@@ -23,6 +23,11 @@ export default class AdventureRouter {
       [AuthMiddleware.verifyToken],
       this.#controller.createAdventure
     );
+    this.#router.get(
+      "/",
+      [AuthMiddleware.verifyToken],
+      this.#controller.getAllAdventures
+    );
   };
 
   getRouterPath = () => {

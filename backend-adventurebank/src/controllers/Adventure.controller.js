@@ -15,4 +15,13 @@ export default class AdventureController {
       res.status(500).json({ message: error.message });
     }
   };
+
+  getAllAdventures = async (req, res) => {
+    try {
+      const allAdventures = await this.#service.getAllAdventures(req.userId);
+      res.status(200).json(allAdventures);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
 }

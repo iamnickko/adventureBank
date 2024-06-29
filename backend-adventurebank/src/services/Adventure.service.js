@@ -1,11 +1,20 @@
 import Adventure from "../models/Adventure.model.js";
 
 export default class AdventureService {
-  createAdventure = (newAdventure) => {
+  createAdventure = async (newAdventure) => {
     console.log("AdventureService: ", newAdventure);
     try {
-      const adventure = Adventure.create(newAdventure);
+      const adventure = await Adventure.create(newAdventure);
       return adventure;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  getAllAdventures = async (userId) => {
+    try {
+      const allAdventures = await Adventure.find({ userId });
+      return allAdventures;
     } catch (error) {
       throw error;
     }
