@@ -113,6 +113,7 @@ const AuthForm = ({ isLoggingIn, setHasCookie }) => {
           )}
         </label>
         <button
+          name="submit"
           disabled={btnIsDisabled}
           className="mx-auto w-1/3 py-2 border-2 border-lime-400 bg-lime-200/50 rounded-full hover:bg-lime-400/50 active:bg-lime-600/50 focus:outline-none focus:ring focus:ring-lime-300 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed"
           type="submit"

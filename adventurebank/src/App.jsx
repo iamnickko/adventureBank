@@ -7,6 +7,7 @@ import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import Adventures from "./pages/Adventures";
 
 function App() {
   const [hasCookie, setHasCookie] = useState(false);
@@ -42,6 +43,8 @@ function App() {
           path="/admin"
           element={isAdmin ? <Admin /> : <Navigate to="/" />}
         />
+        <Route path="/adventures" element={<Adventures />} />
+        <Route path="/adventures/new" element={<p>adventure list</p>} />
       </Routes>
     </>
   );
