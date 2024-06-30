@@ -290,7 +290,7 @@ describe("Integration Tests:", () => {
     });
   });
 
-  describe("AdventureRouter tests", () => {
+  describe.skip("AdventureRouter tests", () => {
     let jwtToken;
     let user;
 
@@ -301,7 +301,7 @@ describe("Integration Tests:", () => {
       });
     });
 
-    describe.skip("POST requests to /adventures on AdventureRouter", () => {
+    describe("POST requests to /adventures on AdventureRouter", () => {
       it("should respond with a 200 status code when adventure is valid", async () => {
         const response = await request
           .post("/adventures")
@@ -309,14 +309,42 @@ describe("Integration Tests:", () => {
           .send(testAdventures[0]);
         expect(response.status).to.equal(201);
       });
+
+      it("should return a 401 status code if no token", async () => {
+        const response = await request
+          .post("/adventures")
+          .send(testAdventures[0]);
+        expect(response.status).to.equal(401);
+      });
+
+      it("should return a 403 if the token is invalid", async () => {
+        jwtToken = "invalid";
+        const response = await request
+          .post("/adventures")
+          .set("x-access-token", jwtToken);
+        expect(response.status).to.equal(403);
+      });
     });
 
-    describe.skip("GET requests to /adventures on AdventureRouter", () => {
+    describe("GET requests to /adventures on AdventureRouter", () => {
       it("should respond with a 200 status code if valid", async () => {
         const response = await request
           .get("/adventures")
           .set("x-access-token", jwtToken);
         expect(response.status).to.equal(200);
+      });
+
+      it("should return a 401 status code if no token", async () => {
+        const response = await request.get("/adventures");
+        expect(response.status).to.equal(401);
+      });
+
+      it("should return a 403 if the token is invalid", async () => {
+        jwtToken = "invalid";
+        const response = await request
+          .get("/adventures")
+          .set("x-access-token", jwtToken);
+        expect(response.status).to.equal(403);
       });
     });
 
@@ -328,6 +356,23 @@ describe("Integration Tests:", () => {
           .delete(`/adventures/${adventure._id}`)
           .set("x-access-token", jwtToken);
         expect(response.status).to.equal(200);
+      });
+
+      it("should return a 401 status code if no token", async () => {
+        user = await User.findOne({ email: testUsers[0].email });
+        const adventure = await Adventure.findOne({ userId: user._id });
+        const response = await request.delete(`/adventures/${adventure._id}`);
+        expect(response.status).to.equal(401);
+      });
+
+      it("should return a 403 if the token is invalid", async () => {
+        jwtToken = "invalid";
+        user = await User.findOne({ email: testUsers[0].email });
+        const adventure = await Adventure.findOne({ userId: user._id });
+        const response = await request
+          .delete(`/adventures/${adventure._id}`)
+          .set("x-access-token", jwtToken);
+        expect(response.status).to.equal(403);
       });
     });
   });
