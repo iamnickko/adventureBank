@@ -38,8 +38,8 @@ const testData = {
     {
       name: "Sahara Desert Crossing",
       description: "Crossing the Sahara on foot.",
-      userId: "HungryHippo", // Reference by username
-      gearItems: ["Camping Stove"], // Reference by gear item name
+      // userId: "HungryHippo", // Reference by username
+      // gearItems: ["Camping Stove"], // Reference by gear item name
     },
   ],
   newUser: {

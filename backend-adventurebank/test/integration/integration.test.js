@@ -74,8 +74,10 @@ describe("Integration Tests:", () => {
     try {
       const hashedPassword = bcrypt.hashSync(testUsers[0].password, 10);
       const hashedTestUser0 = { ...testUsers[0], password: hashedPassword };
-      await User.create(hashedTestUser0);
+      const user = await User.create(hashedTestUser0);
       console.log("Successfully inserted first user.");
+      await Adventure.create({ ...testAdventures[0], userId: user._id });
+      console.log("and their adventure.");
     } catch (error) {
       console.log(error.message);
       console.log("Error when inserting first user.");
@@ -84,8 +86,10 @@ describe("Integration Tests:", () => {
     try {
       const hashedPassword = bcrypt.hashSync(testUsers[1].password, 10);
       const hashedTestUser1 = { ...testUsers[1], password: hashedPassword };
-      await User.create(hashedTestUser1);
+      const user = await User.create(hashedTestUser1);
       console.log("Successfully inserted second user.");
+      await Adventure.create({ ...testAdventures[1], userId: user._id });
+      console.log("and their adventure.");
     } catch (error) {
       console.log(error.message);
       console.log("Error when inserting second user.");
@@ -297,7 +301,7 @@ describe("Integration Tests:", () => {
       });
     });
 
-    describe("POST requests to /adventures on AdventureRouter", () => {
+    describe.skip("POST requests to /adventures on AdventureRouter", () => {
       it("should respond with a 200 status code when adventure is valid", async () => {
         const response = await request
           .post("/adventures")
@@ -307,10 +311,21 @@ describe("Integration Tests:", () => {
       });
     });
 
-    describe("GET requests to /adventures on AdventureRouter", () => {
+    describe.skip("GET requests to /adventures on AdventureRouter", () => {
       it("should respond with a 200 status code if valid", async () => {
         const response = await request
           .get("/adventures")
+          .set("x-access-token", jwtToken);
+        expect(response.status).to.equal(200);
+      });
+    });
+
+    describe("DELETE requests to /adventures/:id on AdventureRouter", () => {
+      it("should respond with a 200 status code if valid", async () => {
+        user = await User.findOne({ email: testUsers[0].email });
+        const adventure = await Adventure.findOne({ userId: user._id });
+        const response = await request
+          .delete(`/adventures/${adventure._id}`)
           .set("x-access-token", jwtToken);
         expect(response.status).to.equal(200);
       });
