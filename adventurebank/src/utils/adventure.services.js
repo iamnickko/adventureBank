@@ -28,3 +28,17 @@ export const getAllAdventures = async () => {
     console.log(error);
   }
 };
+
+export const deleteAdventure = async (id) => {
+  try {
+    const response = axios.delete(
+      `${import.meta.env.VITE_APP_API}/adventures/${id}`,
+      {
+        headers: authHeader(),
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

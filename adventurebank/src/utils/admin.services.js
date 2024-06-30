@@ -9,7 +9,6 @@ export const getAllUsers = async () => {
 };
 
 export const deleteUser = async (userId) => {
-  console.log(userId);
   const response = await axios.delete(
     `${import.meta.env.VITE_APP_API}/admin/user/${userId}`,
     { headers: authHeader() }
