@@ -6,16 +6,23 @@ export default class AdventureService {
       const adventure = await Adventure.create(newAdventure);
       return adventure;
     } catch (error) {
-      throw error;
+      throw new Error(
+        "An unexpected error occurred whilst trying to creating a new adventure."
+      );
     }
   };
 
   getAllAdventures = async (userId) => {
     try {
       const allAdventures = await Adventure.find({ userId });
+      if (!allAdventures) {
+        throw new Error("There are no adventures to display.");
+      }
       return allAdventures;
     } catch (error) {
-      throw error;
+      throw new Error(
+        "An unexpected error occurred whilst searching for all adventures."
+      );
     }
   };
 
@@ -26,7 +33,9 @@ export default class AdventureService {
       });
       return deleteAdventure;
     } catch (error) {
-      throw error;
+      throw new Error(
+        "An unexpected error occurred whilst trying to delete the adventure."
+      );
     }
   };
 }

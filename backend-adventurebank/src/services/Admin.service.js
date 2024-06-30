@@ -10,7 +10,7 @@ export default class AdminService {
       return allUsers;
     } catch (error) {
       throw new Error(
-        "An unexpected error ocurred whilst searching for all users."
+        "An unexpected error occurred whilst searching for all users."
       );
     }
   };
@@ -24,7 +24,7 @@ export default class AdminService {
       return userToDelete;
     } catch (error) {
       throw new Error(
-        "An unexpected error ocurred whilst trying to delete user."
+        "An unexpected error occurred whilst trying to delete user."
       );
     }
   };
