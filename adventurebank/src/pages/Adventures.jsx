@@ -24,7 +24,10 @@ const Adventures = () => {
         {isLoading ? (
           <p>Loading adventures</p>
         ) : (
-          <AdventureList allAdventures={allAdventures} />
+          <AdventureList
+            allAdventures={allAdventures}
+            fetchAllAdventures={fetchAllAdventures}
+          />
         )}
       </span>
       <span>
