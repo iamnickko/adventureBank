@@ -63,7 +63,7 @@ describe.skip("AdminService tests", () => {
         await adminService.getAllUsers();
       } catch (error) {
         expect(error.message).to.equal(
-          "An unexpected error ocurred whilst searching for all users."
+          "An unexpected error occurred whilst searching for all users."
         );
       }
     });
@@ -91,7 +91,7 @@ describe.skip("AdminService tests", () => {
         await adminService.deleteUser(mockDBUser._id);
       } catch (error) {
         expect(error.message).to.equal(
-          "An unexpected error ocurred whilst trying to delete user."
+          "An unexpected error occurred whilst trying to delete user."
         );
       }
     });

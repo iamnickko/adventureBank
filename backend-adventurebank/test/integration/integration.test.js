@@ -23,7 +23,7 @@ import User from "../../src/models/User.model.js";
 
 const { testUsers, newUser, existingUser, testAdventures } = testData;
 
-describe("Integration Tests:", () => {
+describe.skip("Integration Tests:", () => {
   let server;
   let database;
   let request;
@@ -97,7 +97,7 @@ describe("Integration Tests:", () => {
     }
   });
 
-  describe.skip("AuthRouter Tests", () => {
+  describe("AuthRouter Tests", () => {
     describe("POST requests to /register on AuthRouter:", () => {
       it("should respond with a 201 status code when registering a valid user.", async () => {
         const response = await request.post("/auth/register").send(newUser);
@@ -208,7 +208,7 @@ describe("Integration Tests:", () => {
     });
   });
 
-  describe.skip("AdminRouter tests", () => {
+  describe("AdminRouter tests", () => {
     let adminUser;
     let token;
     let userToDelete;
@@ -290,7 +290,7 @@ describe("Integration Tests:", () => {
     });
   });
 
-  describe.skip("AdventureRouter tests", () => {
+  describe("AdventureRouter tests", () => {
     let jwtToken;
     let user;
 
