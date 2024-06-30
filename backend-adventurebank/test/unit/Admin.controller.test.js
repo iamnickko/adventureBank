@@ -67,7 +67,7 @@ describe.skip("AdminController tests", () => {
     });
 
     it("should respond with a 200 status code", async () => {
-      adminService.deleteUser.withArgs(userId).resolves(userId);
+      adminService.deleteUser.withArgs(req.params).resolves(testUsers[0]);
       await adminController.deleteUser(req, res);
       expect(res.status.calledWith(200)).to.be.true;
     });
