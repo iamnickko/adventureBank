@@ -1,24 +1,9 @@
-import { useEffect, useState } from "react";
-
-import { getAllAdventures, deleteAdventure } from "../utils/adventure.services";
+import { deleteAdventure } from "../utils/adventure.services";
 import Card from "../components/ui/Card";
 
-const AdventureList = () => {
-  const [allAdventures, setAllAdventures] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchAllAdventures = async () => {
-      const data = await getAllAdventures();
-      setAllAdventures(data);
-      setIsLoading(false);
-    };
-    fetchAllAdventures();
-  }, []);
-
+const AdventureList = ({ allAdventures }) => {
   return (
     <>
-      {isLoading && <p>Loading adventures</p>}
       {allAdventures.map((adventure) => (
         <Card key={adventure._id}>
           <article className="flex justify-between items-center">

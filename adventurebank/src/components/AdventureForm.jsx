@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import Card from "../components/ui/Card";
 import { createAdventure } from "../utils/adventure.services";
@@ -8,8 +7,7 @@ import {
   isNameInputValid,
 } from "../utils/validation.services";
 
-const AdventureForm = () => {
-  const navigate = useNavigate();
+const AdventureForm = ({ fetchAllAdventures }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [btnIsDisabled, setBtnIsDisabled] = useState(true);
@@ -26,7 +24,7 @@ const AdventureForm = () => {
     setSubmitError("");
   }, [name, description]);
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (btnIsDisabled) return;
     setBtnIsDisabled(true);
@@ -50,8 +48,10 @@ const AdventureForm = () => {
     }
 
     try {
-      createAdventure({ name, description });
-      navigate("/adventures");
+      await createAdventure({ name, description });
+      await fetchAllAdventures();
+      setName("");
+      setDescription("");
     } catch (error) {
       setSubmitError(error.message);
       setBtnIsDisabled(false);
