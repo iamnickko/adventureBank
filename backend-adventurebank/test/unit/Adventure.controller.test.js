@@ -40,5 +40,12 @@ describe("AdventureController tests", () => {
       await adventureController.createAdventure(req, res);
       expect(res.status.calledWith(201)).to.be.true;
     });
+
+    it("should respond with 500 if createAdventure fails", async () => {
+      const errorMessage = "yuck!";
+      adventureService.createAdventure.rejects(new Error(errorMessage));
+      await adventureController.createAdventure(req, res);
+      expect(res.status.calledWith(500)).to.be.true;
+    });
   });
 });
