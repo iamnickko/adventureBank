@@ -7,38 +7,46 @@ import supertest from "supertest";
 import AdminController from "../../src/controllers/Auth.controller.js";
 import AdminService from "../../src/services/Admin.service.js";
 import AdminRouter from "../../src/routes/Admin.routes.js";
+import AdventureController from "../../src/controllers/Adventure.controller.js";
+import AdventureService from "../../src/services/Adventure.service.js";
+import AdventureRouter from "../../src/routes/Adventure.routes.js";
+import AuthController from "../../src/controllers/Auth.controller.js";
 import AuthRouter from "../../src/routes/Auth.routes.js";
 import AuthService from "../../src/services/Auth.service.js";
 import Config from "../../src/config/Config.js";
 import Database from "../../src/database/Database.js";
 import Router from "../../src/routes/Router.js";
 import Server from "../../src/server/Server.js";
-import testData from "../data/testUsers.js";
-import AuthController from "../../src/controllers/Auth.controller.js";
+import testData from "../data/testData.js";
 import User from "../../src/models/User.model.js";
 
 const { testUsers, newUser, existingUser } = testData;
 
-describe.skip("Integration Tests:", () => {
+describe("Integration Tests:", () => {
   let server;
   let database;
   let request;
   let router;
   let authController;
   let adminController;
+  let adventureController;
 
   before(async () => {
     Config.load();
     const { PORT, HOST, DB_URI } = process.env;
     const authService = new AuthService();
     const adminService = new AdminService();
+    const adventureService = new AdventureService();
     authController = new AuthController(authService);
     adminController = new AdminController(adminService);
+    adventureController = new AdventureController(adventureService);
     router = new Router();
     const authRouter = new AuthRouter();
     const adminRouter = new AdminRouter();
+    const adventureRouter = new AdventureRouter();
     router.addRouter(authRouter);
     router.addRouter(adminRouter);
+    router.addRouter(adventureRouter);
     database = new Database(DB_URI);
     server = new Server(PORT, HOST, router);
     server.start();
@@ -83,7 +91,7 @@ describe.skip("Integration Tests:", () => {
     }
   });
 
-  describe("AuthRouter Tests", () => {
+  describe.skip("AuthRouter Tests", () => {
     describe("POST requests to /register on AuthRouter:", () => {
       it("should respond with a 201 status code when registering a valid user.", async () => {
         const response = await request.post("/auth/register").send(newUser);
@@ -194,7 +202,7 @@ describe.skip("Integration Tests:", () => {
     });
   });
 
-  describe("AdminRouter tests", () => {
+  describe.skip("AdminRouter tests", () => {
     let adminUser;
     let token;
     let userToDelete;
@@ -273,6 +281,12 @@ describe.skip("Integration Tests:", () => {
           .set("x-access-token", token);
         expect(response.status).to.equal(403);
       });
+    });
+  });
+
+  describe("AdventureRouter tests", () => {
+    it("should work", () => {
+      expect(true).to.be.true;
     });
   });
 });
