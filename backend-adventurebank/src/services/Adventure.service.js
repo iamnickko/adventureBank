@@ -18,4 +18,15 @@ export default class AdventureService {
       throw error;
     }
   };
+
+  deleteAdventure = async (adventureId) => {
+    try {
+      const deleteAdventure = await Adventure.findByIdAndDelete({
+        _id: adventureId,
+      });
+      return deleteAdventure;
+    } catch (error) {
+      throw error;
+    }
+  };
 }

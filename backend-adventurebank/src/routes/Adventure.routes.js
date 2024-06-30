@@ -28,6 +28,11 @@ export default class AdventureRouter {
       [AuthMiddleware.verifyToken],
       this.#controller.getAllAdventures
     );
+    this.#router.delete(
+      "/:id",
+      [AuthMiddleware.verifyToken],
+      this.#controller.deleteAdventure
+    );
   };
 
   getRouterPath = () => {

@@ -27,4 +27,14 @@ export default class AdventureController {
       res.status(500).json({ message: error.message });
     }
   };
+
+  deleteAdventure = async (req, res) => {
+    const { id } = req.params;
+    try {
+      const deleteAdventure = await this.#service.deleteAdventure(id);
+      res.status(200).json(deleteAdventure);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
 }

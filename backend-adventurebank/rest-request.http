@@ -88,3 +88,10 @@ Content-Type: application/json
 }
 
 ###
+
+DELETE http://{{host}}:{{port}}/adventures/66806fca8eb6cb3c6b854c63
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2Q2NmFiMTlhYjI0NDFiZDc2OWYxZCIsImlhdCI6MTcxOTc0MTY2NCwiZXhwIjoxNzE5ODI4MDY0fQ.3ZQXRPpHMt35RMFZ6SjJ1Qn_lkT6BpoooX3Xv4HD5H0
+Content-Type: application/json
+
+
+###
