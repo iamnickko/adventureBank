@@ -15,22 +15,21 @@ describe("AdventureController tests", () => {
       getAllAdventures: sinon.stub().returnsThis(),
       deleteAdventure: sinon.stub().returnsThis(),
     };
-
     adventureController = new AdventureController(adventureService);
-    (req = {
+    req = {
       body: {},
-    }),
-      (res = {
-        headers: sinon.stub().returnsThis(),
-        set: sinon.stub().returnsThis(),
-        status: sinon.stub().returnsThis(),
-        json: sinon.spy(),
-      });
+    };
+    res = {
+      headers: sinon.stub().returnsThis(),
+      set: sinon.stub().returnsThis(),
+      status: sinon.stub().returnsThis(),
+      json: sinon.spy(),
+    };
   });
 
   describe("createAdventure tests", () => {
-    it("should", () => {
-      expect(true).to.be.true;
+    it("should respond with a 200 status code", async () => {
+      adventureService.createAdventure.resolves();
     });
   });
 });
