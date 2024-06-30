@@ -289,7 +289,6 @@ describe("Integration Tests:", () => {
   describe("AdventureRouter tests", () => {
     let jwtToken;
     let user;
-    let newAdventure;
 
     beforeEach(async () => {
       user = await User.findOne({ email: testUsers[1].email });
@@ -298,13 +297,23 @@ describe("Integration Tests:", () => {
       });
     });
 
-    it("should respond with a 200 status code when adventure is valid", async () => {
-      console.log(newAdventure);
-      const response = await request
-        .post("/adventures")
-        .set("x-access-token", jwtToken)
-        .send(testAdventures[0]);
-      expect(response.status).to.equal(201);
+    describe("POST requests to /adventures on AdventureRouter", () => {
+      it("should respond with a 200 status code when adventure is valid", async () => {
+        const response = await request
+          .post("/adventures")
+          .set("x-access-token", jwtToken)
+          .send(testAdventures[0]);
+        expect(response.status).to.equal(201);
+      });
+    });
+
+    describe("GET requests to /adventures on AdventureRouter", () => {
+      it("should respond with a 200 status code if valid", async () => {
+        const response = await request
+          .get("/adventures")
+          .set("x-access-token", jwtToken);
+        expect(response.status).to.equal(200);
+      });
     });
   });
 });
