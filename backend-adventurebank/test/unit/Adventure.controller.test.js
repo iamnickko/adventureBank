@@ -46,6 +46,7 @@ describe("AdventureController tests", () => {
       adventureService.createAdventure.rejects(new Error(errorMessage));
       await adventureController.createAdventure(req, res);
       expect(res.status.calledWith(500)).to.be.true;
+      expect(res.json.calledWith({ message: errorMessage }));
     });
   });
 });
