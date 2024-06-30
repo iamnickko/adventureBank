@@ -2,7 +2,7 @@ import { expect } from "chai";
 import sinon from "sinon";
 
 import AdminController from "../../src/controllers/Admin.controller.js";
-import testData from "../data/testUsers.js";
+import testData from "../data/testData.js";
 
 // const { testUsers } = testData;
 const testUsers = [

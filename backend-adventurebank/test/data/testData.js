@@ -32,8 +32,8 @@ const testData = {
     {
       name: "Mount Everest Summit",
       description: "Climbing the highest peak on Earth.",
-      userId: "RangerRick", // Reference by username
-      gearItems: ["UltraLight Backpack"], // Reference by gear item name
+      // userId: "RangerRick", // Reference by username
+      // gearItems: ["UltraLight Backpack"], // Reference by gear item name
     },
     {
       name: "Sahara Desert Crossing",

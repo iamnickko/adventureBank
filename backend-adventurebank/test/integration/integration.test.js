@@ -8,6 +8,7 @@ import AdminController from "../../src/controllers/Auth.controller.js";
 import AdminService from "../../src/services/Admin.service.js";
 import AdminRouter from "../../src/routes/Admin.routes.js";
 import AdventureController from "../../src/controllers/Adventure.controller.js";
+import Adventure from "../../src/models/Adventure.model.js";
 import AdventureService from "../../src/services/Adventure.service.js";
 import AdventureRouter from "../../src/routes/Adventure.routes.js";
 import AuthController from "../../src/controllers/Auth.controller.js";
@@ -20,7 +21,7 @@ import Server from "../../src/server/Server.js";
 import testData from "../data/testData.js";
 import User from "../../src/models/User.model.js";
 
-const { testUsers, newUser, existingUser } = testData;
+const { testUsers, newUser, existingUser, testAdventures } = testData;
 
 describe("Integration Tests:", () => {
   let server;
@@ -63,6 +64,7 @@ describe("Integration Tests:", () => {
     await database.connect();
     try {
       await User.deleteMany();
+      await Adventure.deleteMany();
       console.log("Database successfully cleared.");
     } catch (error) {
       console.log(error.message);
@@ -285,8 +287,24 @@ describe("Integration Tests:", () => {
   });
 
   describe("AdventureRouter tests", () => {
-    it("should work", () => {
-      expect(true).to.be.true;
+    let jwtToken;
+    let user;
+    let newAdventure;
+
+    beforeEach(async () => {
+      user = await User.findOne({ email: testUsers[1].email });
+      jwtToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: 86400,
+      });
+    });
+
+    it("should respond with a 200 status code when adventure is valid", async () => {
+      console.log(newAdventure);
+      const response = await request
+        .post("/adventures")
+        .set("x-access-token", jwtToken)
+        .send(testAdventures[0]);
+      expect(response.status).to.equal(201);
     });
   });
 });

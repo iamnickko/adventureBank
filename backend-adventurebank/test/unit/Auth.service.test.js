@@ -4,7 +4,7 @@ import sinon from "sinon";
 
 import AuthService from "../../src/services/Auth.service.js";
 import Config from "../../src/config/Config.js";
-import testData from "../data/testUsers.js";
+import testData from "../data/testData.js";
 import User from "../../src/models/User.model.js";
 
 describe.skip("AuthService tests", () => {

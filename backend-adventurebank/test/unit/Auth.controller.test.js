@@ -2,7 +2,7 @@ import { expect } from "chai";
 import sinon from "sinon";
 
 import AuthController from "../../src/controllers/Auth.controller.js";
-import testData from "../data/testUsers.js";
+import testData from "../data/testData.js";
 
 const { testUsers, newUser, existingUser } = testData;
 
