@@ -11,7 +11,7 @@ import {
 vi.mock("axios");
 vi.mock("js-cookie");
 
-describe.skip("auth.services tests", () => {
+describe("auth.services tests", () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
