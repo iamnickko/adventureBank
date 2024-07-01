@@ -5,7 +5,7 @@ import AdventureService from "../../src/services/Adventure.service.js";
 import Adventure from "../../src/models/Adventure.model.js";
 import Config from "../../src/config/Config.js";
 
-describe.skip("AdventureService tests", () => {
+describe("AdventureService tests", () => {
   let adventureService;
   let createAdventureStub;
   let findAdventuresStub;
@@ -46,6 +46,33 @@ describe.skip("AdventureService tests", () => {
     deleteAdventureStub.restore();
   });
 
+  describe("createAdventure tests", () => {
+    it("should return the adventure object if inputs are valid", async () => {
+      const newAdventure = await adventureService.createAdventure({
+        name: mockDBAdventure.name,
+        description: mockDBAdventure.description,
+      });
+      expect(newAdventure).to.equal(mockDBAdventure);
+    });
+
+    it("should throw an error if createAdventure fails", async () => {
+      createAdventureStub.rejects(new Error());
+      try {
+        await adventureService.createAdventure({
+          name: mockDBAdventure.name,
+          description: mockDBAdventure.description,
+        });
+        expect.fail(
+          "An unexpected error occurred whilst trying to creating a new adventure."
+        );
+      } catch (error) {
+        expect(error.message).to.equal(
+          "An unexpected error occurred whilst trying to creating a new adventure."
+        );
+      }
+    });
+  });
+
   describe("getAllAdventures tests", () => {
     it("should return an array of adventure objects", async () => {
       const fetchAdventures = await adventureService.getAllAdventures();
@@ -72,6 +99,29 @@ describe.skip("AdventureService tests", () => {
       } catch (error) {
         expect(error.message).to.equal(
           "An unexpected error occurred whilst searching for all adventures."
+        );
+      }
+    });
+  });
+
+  describe("deleteAdventure tests", () => {
+    it("should return the deleted adventure object if id is valid", async () => {
+      const deleteIt = await adventureService.deleteAdventure(
+        mockDBAdventure2._id
+      );
+      expect(deleteIt).to.equal(mockDBAdventure2);
+    });
+
+    it("should throw an error if deleteAdventure fails", async () => {
+      deleteAdventureStub.rejects(new Error());
+      try {
+        await adventureService.deleteAdventure(mockDBAdventure2._id);
+        expect.fail(
+          "An unexpected error occurred whilst trying to delete the adventure."
+        );
+      } catch (error) {
+        expect(error.message).to.equal(
+          "An unexpected error occurred whilst trying to delete the adventure."
         );
       }
     });
