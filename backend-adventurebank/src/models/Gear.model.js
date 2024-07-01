@@ -19,10 +19,11 @@ const gearSchema = new Schema(
         "Safety",
         "Other",
       ],
+      required: true,
     },
     weight: { type: Number },
     description: { type: String },
-    user: {
+    userId: {
       type: Types.ObjectId,
       ref: "User",
       required: true,

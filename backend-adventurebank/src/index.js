@@ -3,6 +3,7 @@ import AuthRouter from "./routes/Auth.routes.js";
 import AdventureRouter from "./routes/Adventure.routes.js";
 import Config from "./config/Config.js";
 import Database from "./database/Database.js";
+import GearRouter from "./routes/Gear.routes.js";
 import Router from "./routes/Router.js";
 import Server from "./server/Server.js";
 
@@ -15,9 +16,11 @@ const router = new Router();
 const adminRouter = new AdminRoutes();
 const authRouter = new AuthRouter();
 const adventureRouter = new AdventureRouter();
+const gearRouter = new GearRouter();
 router.addRouter(adminRouter);
 router.addRouter(authRouter);
 router.addRouter(adventureRouter);
+router.addRouter(gearRouter);
 
 const server = new Server(PORT, HOST, router);
 const database = new Database(DB_URI);

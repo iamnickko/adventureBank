@@ -95,3 +95,20 @@ Content-Type: application/json
 
 
 ###
+
+POST http://{{host}}:{{port}}/gear/
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2IzNmE5OTdiYWE1MTcxNTVmOGYxMSIsImlhdCI6MTcxOTg0NDY5OSwiZXhwIjoxNzE5OTMxMDk5fQ.eFOr4rySKOSYAfTN5DTmwg6QnsqZefCx-QCTYLrtdLI
+Content-Type: application/json
+
+{
+    "name": "Osprey 60L backpack",
+    "category": "Backpacks"
+}
+
+###
+
+GET http://{{host}}:{{port}}/gear/
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2IzNmE5OTdiYWE1MTcxNTVmOGYxMSIsImlhdCI6MTcxOTg0NDY5OSwiZXhwIjoxNzE5OTMxMDk5fQ.eFOr4rySKOSYAfTN5DTmwg6QnsqZefCx-QCTYLrtdLI
+Content-Type: application/json
+
+###
