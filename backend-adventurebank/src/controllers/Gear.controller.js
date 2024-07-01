@@ -9,7 +9,6 @@ export default class GearController {
 
   createGear = async (req, res) => {
     const gearToCreate = { ...req.body, userId: req.userId };
-    console.log(gearToCreate);
     try {
       const newGear = await this.#service.createGear(gearToCreate);
       res.status(201).json(newGear);

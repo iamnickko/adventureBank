@@ -394,8 +394,37 @@ describe("Integration Tests:", () => {
   });
 
   describe("GearRouter tests", () => {
-    it("should", () => {
-      expect(true).to.be.true;
+    let jwtToken;
+    let user;
+
+    beforeEach(async () => {
+      user = await User.findOne({ email: testUsers[1].email });
+      jwtToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: 86400,
+      });
+    });
+
+    describe("POST requests to /gear on GearRouter", () => {
+      it("should response with a 200 status code when gear is valid", async () => {
+        const response = await request
+          .post("/gear")
+          .set("x-access-token", jwtToken)
+          .send(testGearItems[0]);
+        expect(response.status).to.equal(201);
+      });
+
+      it("should return a 401 status code if no token", async () => {
+        const response = await request.post("/gear").send(testGearItems[0]);
+        expect(response.status).to.equal(401);
+      });
+
+      it("should return a 403 if the token is invalid", async () => {
+        jwtToken = "invalid";
+        const response = await request
+          .post("/gear")
+          .set("x-access-token", jwtToken);
+        expect(response.status).to.equal(403);
+      });
     });
   });
 });
