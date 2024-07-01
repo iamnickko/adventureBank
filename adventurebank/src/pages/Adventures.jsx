@@ -4,7 +4,7 @@ import AdventureForm from "../components/AdventureForm";
 import AdventureList from "../components/AdventureList";
 import { getAllAdventures } from "../utils/adventure.services";
 
-const Adventures = () => {
+const Adventures = ({ hasCookie }) => {
   const [allAdventures, setAllAdventures] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -15,7 +15,9 @@ const Adventures = () => {
   };
 
   useEffect(() => {
-    fetchAllAdventures();
+    if (hasCookie) {
+      fetchAllAdventures();
+    }
   }, []);
 
   return (

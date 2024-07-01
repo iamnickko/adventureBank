@@ -6,11 +6,11 @@ import AuthForm from "../src/components/AuthForm";
 
 import * as authService from "../src/utils/auth.services";
 vi.mock("../src/utils/auth.services", () => ({
-  login: vi.fn(() => Promise.resolve({ success: true })),
-  register: vi.fn(() => Promise.resolve({ success: true })),
+  login: vi.fn(),
+  register: vi.fn(),
 }));
 
-describe.skip("AuthForm tests", () => {
+describe("AuthForm tests", () => {
   let isLoggingIn;
   const setHasCookie = vi.fn();
 

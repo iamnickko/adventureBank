@@ -1,11 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../utils/auth.services";
 
 const Header = ({ hasCookie, setHasCookie, isAdmin, setIsAdmin }) => {
+  const navigate = useNavigate();
   const onClickHandler = () => {
     logout();
     setHasCookie(false);
     setIsAdmin(false);
+    navigate("/auth?mode=login");
   };
 
   return (

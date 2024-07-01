@@ -11,7 +11,7 @@ import Adventures from "./pages/Adventures";
 
 function App() {
   const [hasCookie, setHasCookie] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (checkForCookie()) {
@@ -43,7 +43,10 @@ function App() {
           path="/admin"
           element={isAdmin ? <Admin /> : <Navigate to="/" />}
         />
-        <Route path="/adventures" element={<Adventures />} />
+        <Route
+          path="/adventures"
+          element={<Adventures hasCookie={hasCookie} />}
+        />
         <Route path="/adventures/new" element={<p>adventure list</p>} />
       </Routes>
     </>

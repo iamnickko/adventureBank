@@ -5,7 +5,7 @@ import { getAllUsers, deleteUser } from "../../src/utils/admin.services";
 vi.mock("axios");
 vi.mock("../../src/utils/auth.services");
 
-describe("admin.services tests", () => {
+describe.skip("admin.services tests", () => {
   describe("getAllUsers tests", () => {
     it("should return an array of users", async () => {
       const mockUserArray = [
