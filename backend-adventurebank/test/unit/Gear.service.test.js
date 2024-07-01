@@ -16,7 +16,6 @@ describe("GearService tests", () => {
   let mockDBGear1;
   let mockDBGear2;
   let gearArray;
-  let newGear;
 
   before(() => {
     Config.load();
@@ -99,14 +98,15 @@ describe("GearService tests", () => {
     });
 
     it("should throw an error if deleteGear fails", async () => {
+      deleteGearStub.rejects(new Error());
       try {
         await gearService.deleteGear(mockDBGear2._id);
         expect.fail(
-          "An unexpected error occurred whilst trying to delete user."
+          "An unexpected error occurred whilst trying to delete the gear item."
         );
       } catch (error) {
         expect(error.message).to.equal(
-          "An unexpected error occurred whilst trying to delete user."
+          "An unexpected error occurred whilst trying to delete the gear item."
         );
       }
     });
