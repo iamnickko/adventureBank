@@ -2,10 +2,10 @@ import { render, screen } from "@testing-library/react";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 
-import AuthForm from "../src/components/AuthForm";
+import AuthForm from "../../src/components/AuthForm";
 
-import * as authService from "../src/utils/auth.services";
-vi.mock("../src/utils/auth.services", () => ({
+import * as authService from "../../src/utils/auth.services";
+vi.mock("../../src/utils/auth.services", () => ({
   login: vi.fn(),
   register: vi.fn(),
 }));
