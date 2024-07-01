@@ -22,13 +22,11 @@ export const getAllAdventures = async () => {
 };
 
 export const deleteAdventure = async (id) => {
-  const response = axios.delete(
+  const response = await axios.delete(
     `${import.meta.env.VITE_APP_API}/adventures/${id}`,
     {
       headers: authHeader(),
     }
   );
   return response.data;
-
-  throw new Error(error.response.data.message);
 };
