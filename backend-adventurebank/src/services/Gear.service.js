@@ -7,7 +7,7 @@ export default class GearService {
       return newGear;
     } catch (error) {
       throw new Error(
-        "An unexpected error occurred whilst trying to create a new adventure."
+        "An unexpected error occurred whilst trying to create new gear."
       );
     }
   };
