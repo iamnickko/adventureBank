@@ -2,6 +2,7 @@ import Gear from "../models/Gear.model.js";
 
 export default class GearService {
   createGear = async (gearToAdd) => {
+    console.log(gearToAdd);
     try {
       const newGear = await Gear.create(gearToAdd);
       return newGear;

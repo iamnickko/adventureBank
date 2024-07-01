@@ -6,8 +6,10 @@ export default class GearController {
   constructor(service = new GearService()) {
     this.#service = service;
   }
+
   createGear = async (req, res) => {
-    const gearToCreate = { userId: req.userId, ...req.body };
+    const gearToCreate = { ...req.body, userId: req.userId };
+    console.log(gearToCreate);
     try {
       const newGear = await this.#service.createGear(gearToCreate);
       res.status(201).json(newGear);

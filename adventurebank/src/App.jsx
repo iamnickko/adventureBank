@@ -8,6 +8,7 @@ import Auth from "./pages/Auth";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Adventures from "./pages/Adventures";
+import Gear from "./pages/Gear";
 
 function App() {
   const [hasCookie, setHasCookie] = useState(false);
@@ -47,7 +48,7 @@ function App() {
           path="/adventures"
           element={<Adventures hasCookie={hasCookie} />}
         />
-        <Route path="/adventures/new" element={<p>adventure list</p>} />
+        <Route path="/gear" element={<Gear hasCookie={hasCookie} />} />
       </Routes>
     </>
   );

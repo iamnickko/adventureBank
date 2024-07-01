@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-
 import Card from "../components/ui/Card";
-import { createAdventure } from "../utils/adventure.services";
+import { createGear } from "../utils/gear.services";
 import {
   isDescriptionValid,
   isNameInputValid,
 } from "../utils/validation.services";
+import { useEffect, useState } from "react";
 
-const AdventureForm = ({ fetchAllAdventures }) => {
+const GearForm = ({ fetchAllGear }) => {
   const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
-  const [btnIsDisabled, setBtnIsDisabled] = useState(true);
   const [formError, setFormError] = useState({ name: "", description: "" });
+  const [btnIsDisabled, setBtnIsDisabled] = useState(true);
   const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
@@ -34,7 +34,6 @@ const AdventureForm = ({ fetchAllAdventures }) => {
         : "Please use only alphanumeric characters and !-@./#&+",
     }));
   };
-
   const validateDescription = () => {
     const descriptionValid = isDescriptionValid(description);
     setBtnIsDisabled(!descriptionValid);
@@ -49,10 +48,8 @@ const AdventureForm = ({ fetchAllAdventures }) => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      await createAdventure({ name, description });
-      await fetchAllAdventures();
-      setName("");
-      setDescription("");
+      await createGear({ name, category, description });
+      await fetchAllGear();
     } catch (error) {
       setSubmitError(error.message);
       setBtnIsDisabled(false);
@@ -63,13 +60,13 @@ const AdventureForm = ({ fetchAllAdventures }) => {
     <Card className="max-w-md mx-auto">
       <form onSubmit={onSubmitHandler} className="grid grid-cols-1 gap-6 mb-5">
         <label htmlFor="name" className="block">
-          <span className="text-gray-700">Name Your Adventure</span>
+          <span className="text-gray-700">Gear Name</span>
           <input
             type="text"
             name="name"
             id="name"
             maxLength="50"
-            placeholder="e.g. One can simply walk into Mordor"
+            placeholder="e.g. Osprey Rook 60L"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             onChange={(e) => setName(e.target.value)}
             value={name}
@@ -81,6 +78,30 @@ const AdventureForm = ({ fetchAllAdventures }) => {
             {formError.name}
           </p>
         )}
+        <label htmlFor="category-select">
+          Choose a Category:
+          <select
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            name="category"
+            id="category-select"
+            required
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
+            value={category}
+          >
+            <option value="">--Please choose an option--</option>
+            <option value="Tent">Tent</option>
+            <option value="Backpack">Backpack</option>
+            <option value="Kitchen">Kitchen</option>
+            <option value="Sleep System">Sleep System</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Organiser">Organiser</option>
+            <option value="Navigation">Navigation</option>
+            <option value="Safety">Safety</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
         <label htmlFor="description" className="block">
           <span className="text-gray-700">Description</span>
           <textarea
@@ -88,7 +109,7 @@ const AdventureForm = ({ fetchAllAdventures }) => {
             id="description"
             rows="10"
             maxLength="400"
-            placeholder="Add some details to your adventure..."
+            placeholder="Add some details about your piece of gear..."
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             onChange={(e) => setDescription(e.target.value)}
             value={description}
@@ -104,11 +125,11 @@ const AdventureForm = ({ fetchAllAdventures }) => {
           disabled={btnIsDisabled}
           className="mx-auto w-1/3 py-2 border-2 border-lime-400 bg-lime-200/50 rounded-full hover:bg-lime-400/50 active:bg-lime-600/50 focus:outline-none focus:ring focus:ring-lime-300 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed"
         >
-          Create Adventure
+          Add Gear
         </button>
         {submitError && <p>{submitError}</p>}
       </form>
     </Card>
   );
 };
-export default AdventureForm;
+export default GearForm;

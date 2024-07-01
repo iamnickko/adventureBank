@@ -9,8 +9,8 @@ const gearSchema = new Schema(
     category: {
       type: String,
       enum: [
-        "Tents",
-        "Backpacks",
+        "Tent",
+        "Backpack",
         "Kitchen",
         "Sleep System",
         "Clothing",

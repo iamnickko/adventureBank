@@ -97,7 +97,7 @@ Content-Type: application/json
 ###
 
 POST http://{{host}}:{{port}}/gear/
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2IzNmE5OTdiYWE1MTcxNTVmOGYxMSIsImlhdCI6MTcxOTg0NDY5OSwiZXhwIjoxNzE5OTMxMDk5fQ.eFOr4rySKOSYAfTN5DTmwg6QnsqZefCx-QCTYLrtdLI
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODJkYTk2NzdlZjFjM2I0M2NkOTM0OSIsImlhdCI6MTcxOTg1MTY3MiwiZXhwIjoxNzE5OTM4MDcyfQ.KZCyWDpMYlll6zyxKxP0PwrXR3pEt2E8sNb-viPlqRk
 Content-Type: application/json
 
 {
@@ -108,13 +108,13 @@ Content-Type: application/json
 ###
 
 GET http://{{host}}:{{port}}/gear/
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2IzNmE5OTdiYWE1MTcxNTVmOGYxMSIsImlhdCI6MTcxOTg0NDY5OSwiZXhwIjoxNzE5OTMxMDk5fQ.eFOr4rySKOSYAfTN5DTmwg6QnsqZefCx-QCTYLrtdLI
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODJkYTk2NzdlZjFjM2I0M2NkOTM0OSIsImlhdCI6MTcxOTg1MTY3MiwiZXhwIjoxNzE5OTM4MDcyfQ.KZCyWDpMYlll6zyxKxP0PwrXR3pEt2E8sNb-viPlqRk
 Content-Type: application/json
 
 ###
 
 DELETE http://{{host}}:{{port}}/gear/6682c482efcb0bf8fffbaffb
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2IzNmE5OTdiYWE1MTcxNTVmOGYxMSIsImlhdCI6MTcxOTg0NDY5OSwiZXhwIjoxNzE5OTMxMDk5fQ.eFOr4rySKOSYAfTN5DTmwg6QnsqZefCx-QCTYLrtdLI
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODJkYTk2NzdlZjFjM2I0M2NkOTM0OSIsImlhdCI6MTcxOTg1MTY3MiwiZXhwIjoxNzE5OTM4MDcyfQ.KZCyWDpMYlll6zyxKxP0PwrXR3pEt2E8sNb-viPlqRk
 Content-Type: application/json
 
 ###
