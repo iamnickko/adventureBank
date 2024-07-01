@@ -1,6 +1,10 @@
 import axios from "axios";
 import { authHeader } from "../../src/utils/auth.services";
-import { createGear } from "../../src/utils/gear.services";
+import {
+  createGear,
+  getAllGear,
+  deleteGear,
+} from "../../src/utils/gear.services";
 
 vi.mock("axios");
 vi.mock("../../src/utils/auth.services");
@@ -36,8 +40,29 @@ describe("gear.services tests", () => {
       authHeader.mockReturnValue({ "X-Access-Token": "ginger nuts" });
 
       const newGear = await createGear(formInput);
-      console.log("NEW GEAR IS ", newGear);
       expect(newGear).toEqual(mockGear1);
+    });
+  });
+
+  describe("getAllGear tests", () => {
+    it("should return an array of gear objects", async () => {
+      axios.get.mockResolvedValue({ data: gearArray });
+      authHeader.mockReturnValue({ "X-Access-Token": "could be a penguin" });
+
+      const allGear = await getAllGear();
+      expect(allGear).toEqual(gearArray);
+    });
+
+    describe("deleteGear tests", () => {
+      it("should return the gear object that was deleted", async () => {
+        axios.delete.mockResolvedValue({ data: mockGear2 });
+        authHeader.mockReturnValue({
+          "X-Access-Token": "probably a chocolate penguin",
+        });
+
+        const deleteTheGear = await deleteGear(mockGear2._id);
+        expect(deleteTheGear).toEqual(mockGear2);
+      });
     });
   });
 });
