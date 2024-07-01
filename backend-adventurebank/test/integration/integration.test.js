@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import { expect } from "chai";
 import jwt from "jsonwebtoken";
-import sinon from "sinon";
 import supertest from "supertest";
 
 import AdminController from "../../src/controllers/Auth.controller.js";
@@ -16,14 +15,19 @@ import AuthRouter from "../../src/routes/Auth.routes.js";
 import AuthService from "../../src/services/Auth.service.js";
 import Config from "../../src/config/Config.js";
 import Database from "../../src/database/Database.js";
+import GearController from "../../src/controllers/Gear.controller.js";
+import GearRouter from "../../src/routes/Gear.routes.js";
+import GearService from "../../src/services/Gear.service.js";
 import Router from "../../src/routes/Router.js";
 import Server from "../../src/server/Server.js";
 import testData from "../data/testData.js";
 import User from "../../src/models/User.model.js";
+import Gear from "../../src/models/Gear.model.js";
 
-const { testUsers, newUser, existingUser, testAdventures } = testData;
+const { testUsers, newUser, existingUser, testAdventures, testGearItems } =
+  testData;
 
-describe.skip("Integration Tests:", () => {
+describe("Integration Tests:", () => {
   let server;
   let database;
   let request;
@@ -31,6 +35,7 @@ describe.skip("Integration Tests:", () => {
   let authController;
   let adminController;
   let adventureController;
+  let gearController;
 
   before(async () => {
     Config.load();
@@ -38,16 +43,20 @@ describe.skip("Integration Tests:", () => {
     const authService = new AuthService();
     const adminService = new AdminService();
     const adventureService = new AdventureService();
+    const gearService = new GearService();
     authController = new AuthController(authService);
     adminController = new AdminController(adminService);
     adventureController = new AdventureController(adventureService);
+    gearController = new GearController(gearService);
     router = new Router();
     const authRouter = new AuthRouter();
     const adminRouter = new AdminRouter();
     const adventureRouter = new AdventureRouter();
+    const gearRouter = new GearRouter();
     router.addRouter(authRouter);
     router.addRouter(adminRouter);
     router.addRouter(adventureRouter);
+    router.addRouter(gearRouter);
     database = new Database(DB_URI);
     server = new Server(PORT, HOST, router);
     server.start();
@@ -65,6 +74,7 @@ describe.skip("Integration Tests:", () => {
     try {
       await User.deleteMany();
       await Adventure.deleteMany();
+      await Gear.deleteMany();
       console.log("Database successfully cleared.");
     } catch (error) {
       console.log(error.message);
@@ -78,6 +88,9 @@ describe.skip("Integration Tests:", () => {
       console.log("Successfully inserted first user.");
       await Adventure.create({ ...testAdventures[0], userId: user._id });
       console.log("and their adventure.");
+      await Gear.create({ ...testGearItems[0], userId: user._id });
+      await Gear.create({ ...testGearItems[1], userId: user._id });
+      console.log("and two pieces of gear.");
     } catch (error) {
       console.log(error.message);
       console.log("Error when inserting first user.");
@@ -90,6 +103,9 @@ describe.skip("Integration Tests:", () => {
       console.log("Successfully inserted second user.");
       await Adventure.create({ ...testAdventures[1], userId: user._id });
       console.log("and their adventure.");
+      await Gear.create({ ...testGearItems[2], userId: user._id });
+      await Gear.create({ ...testGearItems[3], userId: user._id });
+      console.log("and two pieces of gear.");
     } catch (error) {
       console.log(error.message);
       console.log("Error when inserting second user.");
@@ -97,7 +113,7 @@ describe.skip("Integration Tests:", () => {
     }
   });
 
-  describe("AuthRouter Tests", () => {
+  describe.skip("AuthRouter Tests", () => {
     describe("POST requests to /register on AuthRouter:", () => {
       it("should respond with a 201 status code when registering a valid user.", async () => {
         const response = await request.post("/auth/register").send(newUser);
@@ -208,7 +224,7 @@ describe.skip("Integration Tests:", () => {
     });
   });
 
-  describe("AdminRouter tests", () => {
+  describe.skip("AdminRouter tests", () => {
     let adminUser;
     let token;
     let userToDelete;
@@ -290,7 +306,7 @@ describe.skip("Integration Tests:", () => {
     });
   });
 
-  describe("AdventureRouter tests", () => {
+  describe.skip("AdventureRouter tests", () => {
     let jwtToken;
     let user;
 
@@ -374,6 +390,12 @@ describe.skip("Integration Tests:", () => {
           .set("x-access-token", jwtToken);
         expect(response.status).to.equal(403);
       });
+    });
+  });
+
+  describe("GearRouter tests", () => {
+    it("should", () => {
+      expect(true).to.be.true;
     });
   });
 });

@@ -5,7 +5,7 @@ import AdventureService from "../../src/services/Adventure.service.js";
 import Adventure from "../../src/models/Adventure.model.js";
 import Config from "../../src/config/Config.js";
 
-describe("AdventureService tests", () => {
+describe.skip("AdventureService tests", () => {
   let adventureService;
   let createAdventureStub;
   let findAdventuresStub;

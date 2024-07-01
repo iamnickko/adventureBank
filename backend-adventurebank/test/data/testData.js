@@ -15,17 +15,25 @@ const testData = {
   testGearItems: [
     {
       name: "UltraLight Backpack",
-      category: "Backpacks",
-      weight: 1200, // in grams
+      category: "Backpack",
       description: "A lightweight backpack for long adventures.",
-      user: "RangerRick", // Reference by username
+    },
+    {
+      name: "Invisible Tent",
+      category: "Tent",
+      description:
+        "So lightweight and transparent, you won't even know it's there!",
     },
     {
       name: "Camping Stove",
       category: "Kitchen",
-      weight: 300, // in grams
       description: "Compact camping stove.",
-      user: "HungryHippo", // Reference by username
+    },
+    {
+      name: "Self-Walking Boots",
+      category: "Clothing",
+      description:
+        "Just set your destination, sit back, and enjoy the journey. Walking is so last year.",
     },
   ],
   testAdventures: [
