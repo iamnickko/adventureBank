@@ -52,4 +52,34 @@ describe("GearForm tests", () => {
       expect(gearService.createGear).toHaveBeenCalled();
     });
   });
+
+  describe("Display error messages", () => {
+    it("should render an error message if invalid character in name input", async () => {
+      renderWithRouter();
+      const nameInput = await screen.findByPlaceholderText(
+        "e.g. Osprey Rook 60L"
+      );
+      await userEvent.type(nameInput, "Ü");
+      nameInput.blur();
+      expect(
+        await screen.findByText(
+          "Please use only alphanumeric characters and !-@./#&+"
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("should render an error message if invalid character in description input", async () => {
+      renderWithRouter();
+      const descriptionInput = await screen.findByPlaceholderText(
+        "Add some details about your piece of gear..."
+      );
+      await userEvent.type(descriptionInput, "Ü");
+      descriptionInput.blur();
+      expect(
+        await screen.findByText(
+          "Please use only alphanumeric characters and !-@./#&+"
+        )
+      ).toBeInTheDocument();
+    });
+  });
 });
