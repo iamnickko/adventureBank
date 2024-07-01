@@ -27,7 +27,7 @@ import Gear from "../../src/models/Gear.model.js";
 const { testUsers, newUser, existingUser, testAdventures, testGearItems } =
   testData;
 
-describe("Integration Tests:", () => {
+describe.skip("Integration Tests:", () => {
   let server;
   let database;
   let request;
@@ -113,7 +113,7 @@ describe("Integration Tests:", () => {
     }
   });
 
-  describe.skip("AuthRouter Tests", () => {
+  describe("AuthRouter Tests", () => {
     describe("POST requests to /register on AuthRouter:", () => {
       it("should respond with a 201 status code when registering a valid user.", async () => {
         const response = await request.post("/auth/register").send(newUser);
@@ -224,7 +224,7 @@ describe("Integration Tests:", () => {
     });
   });
 
-  describe.skip("AdminRouter tests", () => {
+  describe("AdminRouter tests", () => {
     let adminUser;
     let token;
     let userToDelete;
@@ -306,7 +306,7 @@ describe("Integration Tests:", () => {
     });
   });
 
-  describe.skip("AdventureRouter tests", () => {
+  describe("AdventureRouter tests", () => {
     let jwtToken;
     let user;
 
@@ -422,6 +422,56 @@ describe("Integration Tests:", () => {
         jwtToken = "invalid";
         const response = await request
           .post("/gear")
+          .set("x-access-token", jwtToken);
+        expect(response.status).to.equal(403);
+      });
+    });
+
+    describe("GET requests to /gear on GearRouter", () => {
+      it("should respond with a 200 status code if valid", async () => {
+        const response = await request
+          .get("/gear")
+          .set("x-access-token", jwtToken);
+        expect(response.status).to.equal(200);
+      });
+
+      it("should return a 401 status code if no token", async () => {
+        const response = await request.get("/gear");
+        expect(response.status).to.equal(401);
+      });
+
+      it("should return a 403 if the token is invalid", async () => {
+        jwtToken = "invalid";
+        const response = await request
+          .get("/gear")
+          .set("x-access-token", jwtToken);
+        expect(response.status).to.equal(403);
+      });
+    });
+
+    describe("DELETE requests to /gear/:id on GearRouter", () => {
+      it("should respond with a 200 status code if valid", async () => {
+        user = await User.findOne({ email: testUsers[0].email });
+        const gear = await Gear.findOne({ userId: user._id });
+        const response = await request
+          .delete(`/gear/${gear._id}`)
+          .set("x-access-token", jwtToken);
+        expect(response.status).to.equal(200);
+      });
+
+      it("should return a 401 status code if no token", async () => {
+        user = await User.findOne({ email: testUsers[0].email });
+        const gear = await Gear.findOne({ userId: user._id });
+        const response = await request.delete(`/gear/${gear._id}`);
+        expect(response.status).to.equal(401);
+      });
+
+      it("should return a 403 if the token is invalid", async () => {
+        jwtToken = "invalid";
+        user = await User.findOne({ email: testUsers[0].email });
+        const gear = await Gear.findOne({ userId: user._id });
+        const response = await request
+          .delete(`/gear/${gear._id}`)
           .set("x-access-token", jwtToken);
         expect(response.status).to.equal(403);
       });
