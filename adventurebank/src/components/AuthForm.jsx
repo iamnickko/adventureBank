@@ -26,28 +26,28 @@ const AuthForm = ({ isLoggingIn, setHasCookie }) => {
     setFormError({});
   }, [username, email, password]);
 
+  const validateEmail = () => {
+    const emailValid = isEmailValid(email);
+    setBtnIsDisabled(!emailValid);
+    setFormError((prevErrors) => ({
+      ...prevErrors,
+      email: emailValid ? "" : "Invalid email format.",
+    }));
+  };
+
+  const validatePassword = () => {
+    const passwordValid = isPasswordValid(password);
+    setBtnIsDisabled(!passwordValid);
+    setFormError((prevErrors) => ({
+      ...prevErrors,
+      password: passwordValid
+        ? ""
+        : "Password must contain at least one lowercase letter, one capital letter, one number, one special character, and be between 8-15 characters long.",
+    }));
+  };
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    if (btnIsDisabled) return;
-    setBtnIsDisabled(true);
-    setError("");
-    setFormError({ email: "", password: "" });
-
-    const emailValid = isEmailValid(email);
-    const passwordValid = isPasswordValid(password);
-
-    if (!emailValid || !passwordValid) {
-      setFormError({
-        ...formError,
-        email: emailValid ? "" : "Invalid email format.",
-        password: passwordValid
-          ? ""
-          : "Password must contain at least one lowercase letter, one capital letter, one number, one special character, and be between 8-15 characters long.",
-      });
-      setBtnIsDisabled(false);
-      return;
-    }
-
     try {
       if (isLoggingIn) {
         await login({ email, password });
@@ -91,8 +91,13 @@ const AuthForm = ({ isLoggingIn, setHasCookie }) => {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            onBlur={validateEmail}
           />
-          {formError.email && <p>{formError.email}</p>}
+          {formError.email && (
+            <p className="bg-red-300 text-center mx-auto rounded-3xl py-2 w-full">
+              {formError.email}
+            </p>
+          )}
         </label>
         <label htmlFor="password" className="block">
           <span>Password</span>
@@ -105,6 +110,7 @@ const AuthForm = ({ isLoggingIn, setHasCookie }) => {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            onBlur={validatePassword}
           />
           {formError.password && (
             <p className="bg-red-300 text-center mx-auto rounded-3xl py-2 w-full">
