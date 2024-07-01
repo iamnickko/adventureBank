@@ -26,6 +26,11 @@ export default class GearRouter {
       [AuthMiddleware.verifyToken],
       this.#controller.getAllGear
     );
+    this.#router.delete(
+      "/:id",
+      [AuthMiddleware.verifyToken],
+      this.#controller.deleteGear
+    );
   };
 
   getRouterPath = () => {

@@ -25,4 +25,17 @@ export default class GearService {
       );
     }
   };
+
+  deleteGear = async (gearId) => {
+    try {
+      const deleteGear = await Gear.findByIdAndDelete({
+        _id: gearId,
+      });
+      return deleteGear;
+    } catch (error) {
+      throw new Error(
+        "An unexpected error occurred whilst trying to delete the gear item."
+      );
+    }
+  };
 }

@@ -24,4 +24,14 @@ export default class GearController {
       res.status(500).json({ error: error.message });
     }
   };
+
+  deleteGear = async (req, res) => {
+    const { id } = req.params;
+    try {
+      const deleteGear = await this.#service.deleteGear(id);
+      res.status(200).json(deleteGear);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
 }
