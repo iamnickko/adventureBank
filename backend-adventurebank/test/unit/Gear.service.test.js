@@ -8,15 +8,15 @@ import testData from "../data/testData.js";
 
 const { testGearItems } = testData;
 
-describe.skip("GearService tests", () => {
+describe("GearService tests", () => {
   let gearService;
   let createGearStub;
-
   let findGearStub;
   let deleteGearStub;
   let mockDBGear1;
   let mockDBGear2;
   let gearArray;
+  let newGear;
 
   before(() => {
     Config.load();
@@ -66,6 +66,47 @@ describe.skip("GearService tests", () => {
       } catch (error) {
         expect(error.message).to.equal(
           "An unexpected error occurred whilst searching for your gear."
+        );
+      }
+    });
+  });
+
+  describe("createGear tests", () => {
+    it("should return the gear object if details are valid", async () => {
+      const newGearItem = await gearService.createGear(mockDBGear1);
+      expect(newGearItem).to.equal(mockDBGear1);
+    });
+
+    it("should throw an error if createGear fails", async () => {
+      createGearStub.rejects(new Error());
+      try {
+        await gearService.createGear(mockDBGear1);
+        expect.fail(
+          "An unexpected error occurred whilst trying to create new gear."
+        );
+      } catch (error) {
+        expect(error.message).to.equal(
+          "An unexpected error occurred whilst trying to create new gear."
+        );
+      }
+    });
+  });
+
+  describe("deleteGear tests", () => {
+    it("should return the gear object if id is valid", async () => {
+      const deleteTheGear = await gearService.deleteGear(mockDBGear2._id);
+      expect(deleteTheGear).to.equal(mockDBGear2);
+    });
+
+    it("should throw an error if deleteGear fails", async () => {
+      try {
+        await gearService.deleteGear(mockDBGear2._id);
+        expect.fail(
+          "An unexpected error occurred whilst trying to delete user."
+        );
+      } catch (error) {
+        expect(error.message).to.equal(
+          "An unexpected error occurred whilst trying to delete user."
         );
       }
     });
