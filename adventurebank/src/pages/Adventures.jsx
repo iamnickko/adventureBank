@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import AdventureForm from "../components/AdventureForm";
 import AdventureList from "../components/AdventureList";
+import { createAdventure } from "../utils/adventure.services";
 import { getAllAdventures } from "../utils/adventure.services";
 
 const Adventures = ({ hasCookie }) => {
@@ -12,6 +13,11 @@ const Adventures = ({ hasCookie }) => {
     const data = await getAllAdventures();
     setAllAdventures(data);
     setIsLoading(false);
+  };
+
+  const onSubmitCreateHandler = async (name, description) => {
+    await createAdventure({ name, description });
+    await fetchAllAdventures();
   };
 
   useEffect(() => {
@@ -33,7 +39,7 @@ const Adventures = ({ hasCookie }) => {
         )}
       </span>
       <span>
-        <AdventureForm fetchAllAdventures={fetchAllAdventures} />
+        <AdventureForm onSubmitCreate={onSubmitCreateHandler} />
       </span>
     </div>
   );

@@ -28,7 +28,11 @@ const Header = ({ hasCookie, setHasCookie, isAdmin, setIsAdmin }) => {
         </span>
         {hasCookie && (
           <span>
-            {hasCookie && isAdmin && <NavLink to="/admin">Admin</NavLink>}
+            {hasCookie && isAdmin && (
+              <NavLink className="mr-5" to="/admin">
+                Admin
+              </NavLink>
+            )}
             <button onClick={onClickHandler}>Logout</button>
           </span>
         )}

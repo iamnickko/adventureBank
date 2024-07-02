@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
 import Card from "../components/ui/Card";
-import { createAdventure } from "../utils/adventure.services";
+
 import {
   isDescriptionValid,
   isNameInputValid,
 } from "../utils/validation.services";
 
-const AdventureForm = ({ fetchAllAdventures }) => {
+const AdventureForm = ({ onSubmitCreate }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [btnIsDisabled, setBtnIsDisabled] = useState(true);
@@ -49,8 +49,7 @@ const AdventureForm = ({ fetchAllAdventures }) => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      await createAdventure({ name, description });
-      await fetchAllAdventures();
+      onSubmitCreate(name, description);
       setName("");
       setDescription("");
     } catch (error) {

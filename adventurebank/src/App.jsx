@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { checkForCookie } from "./utils/auth.services";
 
 import Admin from "./pages/Admin";
+import Adventures from "./pages/Adventures";
 import Auth from "./pages/Auth";
+import EditAdventure from "./pages/AdventureDetails";
+import Gear from "./pages/Gear";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import Adventures from "./pages/Adventures";
-import Gear from "./pages/Gear";
 
 function App() {
   const [hasCookie, setHasCookie] = useState(false);
@@ -48,6 +49,7 @@ function App() {
           path="/adventures"
           element={<Adventures hasCookie={hasCookie} />}
         />
+        <Route path="/adventures/:id" element={<EditAdventure />} />
         <Route path="/gear" element={<Gear hasCookie={hasCookie} />} />
       </Routes>
     </>

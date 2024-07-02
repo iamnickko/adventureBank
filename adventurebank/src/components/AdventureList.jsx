@@ -1,6 +1,6 @@
 import { deleteAdventure } from "../utils/adventure.services";
 import Card from "../components/ui/Card";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const AdventureList = ({ allAdventures, fetchAllAdventures }) => {
   const navigate = useNavigate();
@@ -21,8 +21,8 @@ const AdventureList = ({ allAdventures, fetchAllAdventures }) => {
               </header>
               <p>{adventure.description}</p>
             </span>
-            <span className="sm:flex sm:justify-center gap-3">
-              <button>Edit</button>
+            <span className="sm:flex sm:justify-center gap-3 items-center">
+              <Link to={`/adventures/${adventure._id}`}>Edit</Link>
               <button
                 onClick={async () => {
                   await deleteAdventure(adventure._id);

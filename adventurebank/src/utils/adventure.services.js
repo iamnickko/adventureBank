@@ -21,12 +21,30 @@ export const getAllAdventures = async () => {
   return response.data;
 };
 
+export const getOneAdventure = async (id) => {
+  console.log(id);
+  const response = await axios.get(
+    `${import.meta.env.VITE_APP_API}/adventures/${id}`,
+    { headers: authHeader() }
+  );
+  return response.data;
+};
+
 export const deleteAdventure = async (id) => {
   const response = await axios.delete(
     `${import.meta.env.VITE_APP_API}/adventures/${id}`,
     {
       headers: authHeader(),
     }
+  );
+  return response.data;
+};
+
+export const editAdventure = async (formInput, id) => {
+  const response = await axios.put(
+    `${import.meta.env.VITE_APP_API}/adventures/${id}`,
+    { formInput },
+    { headers: authHeader() }
   );
   return response.data;
 };

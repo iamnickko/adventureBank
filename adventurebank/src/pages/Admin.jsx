@@ -37,8 +37,8 @@ const Admin = () => {
             <span>
               <button
                 className="w-full border-2 p-2 border-red-400 bg-red-200/50 rounded-xl hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring focus:ring-red-300"
-                onClick={() => {
-                  deleteUser(user._id);
+                onClick={async () => {
+                  await deleteUser(user._id);
                 }}
                 value={user._id}
               >
