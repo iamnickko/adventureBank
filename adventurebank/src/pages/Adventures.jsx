@@ -30,7 +30,7 @@ const Adventures = ({ hasCookie }) => {
     <div className="lg:grid lg:grid-cols-3 lg:gap-3">
       <span className="lg:col-span-2">
         {isLoading ? (
-          <p>Loading adventures</p>
+          <p>Loading adventures...</p>
         ) : (
           <AdventureList
             allAdventures={allAdventures}
