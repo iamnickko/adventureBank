@@ -5,9 +5,7 @@ export default class AuthMiddleware {
   static verifyToken = async (req, res, next) => {
     let token = req.headers["x-access-token"];
     if (!token) {
-      res
-        .status(401)
-        .json({ message: "You shall not pass...without a token." });
+      res.status(401).json({ message: "You require a token." });
     }
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
@@ -27,7 +25,7 @@ export default class AuthMiddleware {
       next();
       return;
     } else {
-      res.status(403).json({ message: "You shall not pass...you no admin!" });
+      res.status(403).json({ message: "You do not have admin privileges!" });
     }
     next();
   };
