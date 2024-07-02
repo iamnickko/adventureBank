@@ -15,8 +15,8 @@ const EditAdventure = () => {
     fetchOneAdventure(id);
   }, [id]);
 
-  const onSubmitEdit = async (object) => {
-    await editAdventure({ ...object });
+  const onSubmitEdit = async (formObject) => {
+    await editAdventure(formObject);
   };
 
   return (

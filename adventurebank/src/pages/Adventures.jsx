@@ -15,8 +15,8 @@ const Adventures = ({ hasCookie }) => {
     setIsLoading(false);
   };
 
-  const onSubmitCreateHandler = async (name, description) => {
-    await createAdventure({ name, description });
+  const onSubmitCreateHandler = async (formObject) => {
+    await createAdventure(formObject);
     await fetchAllAdventures();
   };
 
@@ -39,7 +39,7 @@ const Adventures = ({ hasCookie }) => {
         )}
       </span>
       <span>
-        <AdventureForm onSubmitCreate={onSubmitCreateHandler} />
+        <AdventureForm handleSubmit={onSubmitCreateHandler} />
       </span>
     </div>
   );
