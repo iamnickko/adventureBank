@@ -60,7 +60,7 @@ const AuthForm = ({ isLoggingIn, setHasCookie, setIsAdmin }) => {
         await register({ username, email, password });
       }
       setHasCookie(true);
-      navigate("/");
+      navigate("/adventures");
     } catch (error) {
       setError(error.message);
       setBtnIsDisabled(false);
