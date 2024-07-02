@@ -5,6 +5,7 @@ import {
   getAllAdventures,
   deleteAdventure,
   editAdventure,
+  getOneAdventure,
 } from "../../src/utils/adventure.services";
 
 vi.mock("axios");
@@ -85,6 +86,16 @@ describe("adventure.service tests", () => {
 
           const updatedAdventure = await editAdventure(mockAdventure1);
           expect(updatedAdventure).toEqual(mockAdventure1);
+        });
+      });
+
+      describe("getOneAdventure tests", () => {
+        it("should return the one adventure object", async () => {
+          axios.get.mockResolvedValue({ data: mockAdventure2 });
+          authHeader.mockReturnValue({ "X-Access-Token": "biscoff" });
+
+          const oneAdventure = await getOneAdventure(mockAdventure2._id);
+          expect(oneAdventure).toEqual(mockAdventure2);
         });
       });
     });
