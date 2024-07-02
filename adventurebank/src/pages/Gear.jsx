@@ -1,6 +1,6 @@
 import GearForm from "../components/GearForm";
 import { useEffect, useState } from "react";
-import { getAllGear } from "../utils/gear.services";
+import { getAllGear, createGear } from "../utils/gear.services";
 import GearList from "../components/GearList";
 
 const Gear = ({ hasCookie }) => {
@@ -11,6 +11,11 @@ const Gear = ({ hasCookie }) => {
     const data = await getAllGear();
     setAllGear(data);
     setIsLoading(false);
+  };
+
+  const onSubmitCreateHandler = async (name, category, description) => {
+    await createGear({ name, category, description });
+    await fetchAllGear();
   };
 
   useEffect(() => {
@@ -29,7 +34,7 @@ const Gear = ({ hasCookie }) => {
         )}
       </span>
       <span>
-        <GearForm fetchAllGear={fetchAllGear} />
+        <GearForm onSubmitCreate={onSubmitCreateHandler} />
       </span>
     </div>
   );

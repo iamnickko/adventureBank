@@ -1,12 +1,12 @@
 import Card from "../components/ui/Card";
-import { createGear } from "../utils/gear.services";
+
 import {
   isDescriptionValid,
   isNameInputValid,
 } from "../utils/validation.services";
 import { useEffect, useState } from "react";
 
-const GearForm = ({ fetchAllGear }) => {
+const GearForm = ({ onSubmitCreate }) => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -48,8 +48,10 @@ const GearForm = ({ fetchAllGear }) => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      await createGear({ name, category, description });
-      await fetchAllGear();
+      await onSubmitCreate(name, category, description);
+      setName("");
+      setCategory("");
+      setDescription("");
     } catch (error) {
       setSubmitError(error.message);
       setBtnIsDisabled(false);

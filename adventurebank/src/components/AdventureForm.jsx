@@ -49,7 +49,7 @@ const AdventureForm = ({ onSubmitCreate }) => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      onSubmitCreate(name, description);
+      await onSubmitCreate(name, description);
       setName("");
       setDescription("");
     } catch (error) {
