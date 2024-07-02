@@ -35,7 +35,7 @@ describe("admin.services tests", () => {
     });
   });
 
-  describe.skip("deleteUser tests", () => {
+  describe("deleteUser tests", () => {
     it("should return the value of the deleted user", async () => {
       const mockDeletedUser = { _id: 1, name: "Custard Cream" };
       axios.delete.mockResolvedValue({ data: mockDeletedUser });

@@ -8,14 +8,24 @@ import * as adventureService from "../../src/utils/adventure.services";
 vi.mock("../../src/utils/adventure.services", () => ({
   createAdventure: vi.fn(),
 }));
-const mockFetchAllAdventures = vi.fn();
+const mockOnSubmitEdit = vi.fn();
+const mockAdventure = {
+  _id: 1,
+  name: "To Lidl!",
+  description: "For budget biscuits!",
+};
 
 describe("AdventureForm tests", () => {
   const renderWithRouter = () => {
     const routes = [
       {
         path: "/adventures",
-        element: <AdventureForm fetchAllAdventures={mockFetchAllAdventures} />,
+        element: (
+          <AdventureForm
+            handleSubmit={mockOnSubmitEdit}
+            adventureData={mockAdventure}
+          />
+        ),
       },
       { path: "/", element: <p>redirected</p> },
     ];
@@ -45,7 +55,7 @@ describe("AdventureForm tests", () => {
         name: "Create Adventure",
       });
       await userEvent.click(submitButton);
-      expect(adventureService.createAdventure).toHaveBeenCalled();
+      expect(mockOnSubmitEdit).toHaveBeenCalled();
     });
   });
 

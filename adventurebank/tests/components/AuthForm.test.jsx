@@ -22,7 +22,7 @@ describe("AuthForm tests", () => {
           <AuthForm isLoggingIn={isLoggingIn} setHasCookie={setHasCookie} />
         ),
       },
-      { path: "/", element: <p>redirected</p> },
+      { path: "/adventures", element: <p>redirected</p> },
     ];
 
     const router = createMemoryRouter(routes, {
