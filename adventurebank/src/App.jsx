@@ -47,10 +47,24 @@ function App() {
         />
         <Route
           path="/adventures"
-          element={<Adventures hasCookie={hasCookie} />}
+          element={
+            hasCookie ? (
+              <Adventures hasCookie={hasCookie} />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
         />
-        <Route path="/adventures/:id" element={<EditAdventure />} />
-        <Route path="/gear" element={<Gear hasCookie={hasCookie} />} />
+        <Route
+          path="/adventures/:id"
+          element={hasCookie ? <EditAdventure /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/gear"
+          element={
+            hasCookie ? <Gear hasCookie={hasCookie} /> : <Navigate to="/" />
+          }
+        />
       </Routes>
     </>
   );
