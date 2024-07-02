@@ -43,7 +43,7 @@ function App() {
         />
         <Route
           path="/admin"
-          element={isAdmin ? <Admin /> : <Navigate to="/" />}
+          element={isAdmin ? <Admin isAdmin={isAdmin} /> : <Navigate to="/" />}
         />
         <Route
           path="/adventures"

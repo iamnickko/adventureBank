@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { deleteUser, getAllUsers } from "../utils/admin.services";
 import Card from "../components/ui/Card";
 
-const Admin = () => {
+const Admin = ({ isAdmin }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -12,6 +12,7 @@ const Admin = () => {
       setAllUsers(data);
       setIsLoading(false);
     };
+    if (!isAdmin) return;
     fetchAllUsers();
   }, []);
 
