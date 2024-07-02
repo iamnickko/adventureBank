@@ -26,6 +26,20 @@ export default class AdventureService {
     }
   };
 
+  getOneAdventure = async (adventureId) => {
+    try {
+      const adventure = await Adventure.findById(adventureId);
+      if (!adventure) {
+        throw new Error("No such adventure exists.");
+      }
+      return adventure;
+    } catch (error) {
+      throw new Error(
+        "An unexpected error occurred whilst searching for this adventure."
+      );
+    }
+  };
+
   deleteAdventure = async (adventureId) => {
     try {
       const deleteAdventure = await Adventure.findByIdAndDelete({
@@ -35,6 +49,20 @@ export default class AdventureService {
     } catch (error) {
       throw new Error(
         "An unexpected error occurred whilst trying to delete the adventure."
+      );
+    }
+  };
+
+  editAdventure = async (adventure, userId) => {
+    console.log(adventure, userId);
+    try {
+      const editAdventure = await Adventure.findByIdAndUpdate(adventure._id, {
+        ...adventure,
+      });
+      return editAdventure;
+    } catch (error) {
+      throw new Error(
+        "An unexpected error occurred whilst trying to edit the adventure."
       );
     }
   };

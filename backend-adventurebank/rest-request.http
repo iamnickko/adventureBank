@@ -23,7 +23,7 @@ content-type: application/json
 ###
 
 GET http://{{host}}:{{port}}/admin
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2IzNmE5OTdiYWE1MTcxNTVmOGYxMSIsImlhdCI6MTcxOTQ5OTYzMiwiZXhwIjoxNzE5NTg2MDMyfQ.kbxxWopti9aHkLwXVKYBY3uaeE-LYAMAEpMEjVvBzt8
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODNjMjczOWEwMDE3ZmJjM2I3ZmJiYyIsImlhdCI6MTcxOTkxMjM4MCwiZXhwIjoxNzE5OTk4NzgwfQ.9Nua4OW93TnukwAJJNHT0OvGVuBRIZYo5nZ3n1LitBk
 ###
 
 POST http://{{host}}:{{port}}/auth/register
@@ -46,29 +46,8 @@ content-type: application/json
 }
 
 ###
-
-POST http://{{host}}:{{port}}/auth/register
-content-type: application/json
-
-{
-    "username": "LimestoneFish",
-    "email": "limestone@fish.com",
-    "password": "Password123!"
-}
-
-###
-
-POST http://{{host}}:{{port}}/auth/login
-content-type: application/json
-
-{
-    "email" : "limestone@fish.com",
-    "password": "Password123!"
-}
-
-###
 POST http://{{host}}:{{port}}/adventures
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2Q2NmFiMTlhYjI0NDFiZDc2OWYxZCIsImlhdCI6MTcxOTY4NDk0MCwiZXhwIjoxNzE5NzcxMzQwfQ.Jfhiuae9Bmc4QeIcdai_-PelhM8q_hlQohF7MAv5Vsc
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODNjMjczOWEwMDE3ZmJjM2I3ZmJiYyIsImlhdCI6MTcxOTkxMjAzNSwiZXhwIjoxNzE5OTk4NDM1fQ.JjyMmc0xfJjbzzXd9DosnI8-FPLprrrDfSXaGH3p9Co
 Content-Type: application/json
 
 {
@@ -80,12 +59,9 @@ Content-Type: application/json
 ###
 
 GET http://{{host}}:{{port}}/adventures
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2Q2NmFiMTlhYjI0NDFiZDc2OWYxZCIsImlhdCI6MTcxOTY4NDk0MCwiZXhwIjoxNzE5NzcxMzQwfQ.Jfhiuae9Bmc4QeIcdai_-PelhM8q_hlQohF7MAv5Vsc
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODNjMjczOWEwMDE3ZmJjM2I3ZmJiYyIsImlhdCI6MTcxOTkxMjAzNSwiZXhwIjoxNzE5OTk4NDM1fQ.JjyMmc0xfJjbzzXd9DosnI8-FPLprrrDfSXaGH3p9Co
 Content-Type: application/json
 
-{
-    "userId": "667d66ab19ab2441bd769f1d"
-}
 
 ###
 
@@ -118,3 +94,12 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODJkYTk2NzdlZjF
 Content-Type: application/json
 
 ###
+
+PUT http://{{host}}:{{port}}/adventures/6683c62d0f79b415e16d8760
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODNjMjczOWEwMDE3ZmJjM2I3ZmJiYyIsImlhdCI6MTcxOTkxMjAzNSwiZXhwIjoxNzE5OTk4NDM1fQ.JjyMmc0xfJjbzzXd9DosnI8-FPLprrrDfSXaGH3p9Co
+content-type: application/json
+
+{
+    "name": "Off for a run",
+    "description": "To Isengard"
+}

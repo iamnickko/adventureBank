@@ -15,9 +15,6 @@ export default class AdventureRouter {
   }
 
   #initialise = () => {
-    // this.#router.post("/", [AuthMiddleware.verifyToken], (req, res) => {
-    //   res.status(200).json({ message: "New adventures await!" });
-    // });
     this.#router.post(
       "/",
       [AuthMiddleware.verifyToken],
@@ -28,10 +25,20 @@ export default class AdventureRouter {
       [AuthMiddleware.verifyToken],
       this.#controller.getAllAdventures
     );
+    this.#router.get(
+      "/:id",
+      [AuthMiddleware.verifyToken],
+      this.#controller.getOneAdventure
+    );
     this.#router.delete(
       "/:id",
       [AuthMiddleware.verifyToken],
       this.#controller.deleteAdventure
+    );
+    this.#router.put(
+      "/:id",
+      [AuthMiddleware.verifyToken],
+      this.#controller.editAdventure
     );
   };
 

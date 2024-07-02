@@ -28,11 +28,33 @@ export default class AdventureController {
     }
   };
 
+  getOneAdventure = async (req, res) => {
+    const { id } = req.params;
+    try {
+      const adventure = await this.#service.getOneAdventure(id);
+      res.status(200).json(adventure);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
   deleteAdventure = async (req, res) => {
     const { id } = req.params;
     try {
       const deleteAdventure = await this.#service.deleteAdventure(id);
       res.status(200).json(deleteAdventure);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  editAdventure = async (req, res) => {
+    try {
+      const editAdventure = await this.#service.editAdventure(
+        req.body,
+        req.userId
+      );
+      res.status(200).json(editAdventure);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
