@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AdventureForm from "../components/AdventureForm";
-import { getOneAdventure } from "../utils/adventure.services";
+import { editAdventure, getOneAdventure } from "../utils/adventure.services";
 import { useParams } from "react-router-dom";
 
 const EditAdventure = () => {
@@ -11,14 +11,18 @@ const EditAdventure = () => {
     const fetchOneAdventure = async (id) => {
       const data = await getOneAdventure(id);
       setAdventure(data);
-      console.log(data);
     };
     fetchOneAdventure(id);
   }, [id]);
+
+  const onSubmitEdit = async (object) => {
+    await editAdventure({ ...object });
+  };
+
   return (
     <>
       <h2 className="text-center mb-5 text-3xl">Edit Your Adventure</h2>
-      <AdventureForm />
+      <AdventureForm adventureData={adventure} handleSubmit={onSubmitEdit} />
     </>
   );
 };

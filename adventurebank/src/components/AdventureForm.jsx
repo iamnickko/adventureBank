@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 
 import Card from "../components/ui/Card";
-
 import {
   isDescriptionValid,
   isNameInputValid,
 } from "../utils/validation.services";
 
-const AdventureForm = ({ onSubmitCreate }) => {
+const AdventureForm = ({ handleSubmit, adventureData }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [btnIsDisabled, setBtnIsDisabled] = useState(true);
   const [formError, setFormError] = useState({ name: "", description: "" });
   const [submitError, setSubmitError] = useState("");
+
+  useEffect(() => {
+    if (adventureData) {
+      setName(adventureData.name);
+      setDescription(adventureData.description);
+    }
+  }, [adventureData]);
 
   useEffect(() => {
     if (name && description) {
@@ -49,7 +55,11 @@ const AdventureForm = ({ onSubmitCreate }) => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      await onSubmitCreate(name, description);
+      await handleSubmit({
+        ...adventureData,
+        name: name,
+        description: description,
+      });
       setName("");
       setDescription("");
     } catch (error) {

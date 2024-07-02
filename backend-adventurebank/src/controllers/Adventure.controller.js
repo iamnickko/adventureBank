@@ -49,11 +49,9 @@ export default class AdventureController {
   };
 
   editAdventure = async (req, res) => {
+    console.log("CONTROLLER", req.body);
     try {
-      const editAdventure = await this.#service.editAdventure(
-        req.body,
-        req.userId
-      );
+      const editAdventure = await this.#service.editAdventure({ ...req.body });
       res.status(200).json(editAdventure);
     } catch (error) {
       res.status(500).json({ message: error.message });

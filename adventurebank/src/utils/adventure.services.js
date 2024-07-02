@@ -2,6 +2,7 @@ import axios from "axios";
 import { authHeader } from "./auth.services";
 
 export const createAdventure = async (formInput) => {
+  console.log("calling createAdventure");
   const response = await axios.post(
     `${import.meta.env.VITE_APP_API}/adventures`,
     {
@@ -22,7 +23,6 @@ export const getAllAdventures = async () => {
 };
 
 export const getOneAdventure = async (id) => {
-  console.log(id);
   const response = await axios.get(
     `${import.meta.env.VITE_APP_API}/adventures/${id}`,
     { headers: authHeader() }
@@ -40,10 +40,11 @@ export const deleteAdventure = async (id) => {
   return response.data;
 };
 
-export const editAdventure = async (formInput, id) => {
+export const editAdventure = async (adventure) => {
+  console.log(adventure);
   const response = await axios.put(
-    `${import.meta.env.VITE_APP_API}/adventures/${id}`,
-    { formInput },
+    `${import.meta.env.VITE_APP_API}/adventures/${adventure._id}`,
+    { ...adventure },
     { headers: authHeader() }
   );
   return response.data;

@@ -53,13 +53,19 @@ export default class AdventureService {
     }
   };
 
-  editAdventure = async (adventure, userId) => {
-    console.log(adventure, userId);
+  editAdventure = async (adventure) => {
+    console.log("SERVICE", adventure);
+    console.log("id, ", adventure._id);
     try {
-      const editAdventure = await Adventure.findByIdAndUpdate(adventure._id, {
-        ...adventure,
-      });
-      return editAdventure;
+      const updatedAdventure = await Adventure.findByIdAndUpdate(
+        adventure._id,
+        {
+          ...adventure,
+        },
+        { new: true }
+      );
+      console.log(updatedAdventure);
+      return updatedAdventure;
     } catch (error) {
       throw new Error(
         "An unexpected error occurred whilst trying to edit the adventure."
