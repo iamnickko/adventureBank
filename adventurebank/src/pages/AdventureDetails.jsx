@@ -22,7 +22,11 @@ const EditAdventure = () => {
   return (
     <>
       <h2 className="text-center mb-5 text-3xl">Edit Your Adventure</h2>
-      <AdventureForm adventureData={adventure} handleSubmit={onSubmitEdit} />
+      <AdventureForm
+        adventureData={adventure}
+        handleSubmit={onSubmitEdit}
+        mode={"Edit"}
+      />
     </>
   );
 };
