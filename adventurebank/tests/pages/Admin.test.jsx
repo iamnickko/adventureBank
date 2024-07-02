@@ -30,13 +30,13 @@ describe("Admin page tests", () => {
     adminServices.getAllUsers.mockResolvedValue(mockUsers);
   });
 
-  it("renders user data after fetching", async () => {
+  it("should render user data after fetching", async () => {
     render(<Admin isAdmin={true} />);
     expect(await screen.findByText(mockUsers[0].username)).toBeInTheDocument();
     expect(screen.getByText(mockUsers[1].username)).toBeInTheDocument();
   });
 
-  it("calls deleteUser with correct user ID on delete button click", async () => {
+  it("should call deleteUser with correct user ID on delete button click", async () => {
     adminServices.deleteUser.mockResolvedValue({});
     render(<Admin isAdmin={true} />);
     expect(await screen.findByText(mockUsers[0].username)).toBeInTheDocument();

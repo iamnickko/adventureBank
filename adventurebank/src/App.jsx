@@ -6,7 +6,7 @@ import { checkForCookie } from "./utils/auth.services";
 import Admin from "./pages/Admin";
 import Adventures from "./pages/Adventures";
 import Auth from "./pages/Auth";
-import EditAdventure from "./pages/AdventureDetails";
+import AdventureDetails from "./pages/AdventureDetails";
 import Gear from "./pages/Gear";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -57,7 +57,7 @@ function App() {
         />
         <Route
           path="/adventures/:id"
-          element={hasCookie ? <EditAdventure /> : <Navigate to="/" />}
+          element={hasCookie ? <AdventureDetails /> : <Navigate to="/" />}
         />
         <Route
           path="/gear"

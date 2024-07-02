@@ -3,7 +3,7 @@ import AdventureForm from "../components/AdventureForm";
 import { editAdventure, getOneAdventure } from "../utils/adventure.services";
 import { useParams } from "react-router-dom";
 
-const EditAdventure = () => {
+const AdventureDetails = () => {
   const [adventure, setAdventure] = useState({});
 
   const { id } = useParams();
@@ -30,4 +30,4 @@ const EditAdventure = () => {
     </>
   );
 };
-export default EditAdventure;
+export default AdventureDetails;
