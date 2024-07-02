@@ -10,7 +10,6 @@ export default class AdminService {
       if (!allUsers) {
         throw new Error("There are no users to display.");
       }
-      console.log(allUsers);
       return allUsers;
     } catch (error) {
       throw new Error(

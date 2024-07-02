@@ -2,7 +2,6 @@ import axios from "axios";
 import { authHeader } from "./auth.services";
 
 export const createAdventure = async (formInput) => {
-  console.log("calling createAdventure", formInput);
   const response = await axios.post(
     `${import.meta.env.VITE_APP_API}/adventures`,
     {
@@ -40,7 +39,6 @@ export const deleteAdventure = async (id) => {
 };
 
 export const editAdventure = async (adventure) => {
-  console.log(adventure);
   const response = await axios.put(
     `${import.meta.env.VITE_APP_API}/adventures/${adventure._id}`,
     { ...adventure },

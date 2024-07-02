@@ -54,8 +54,6 @@ export default class AdventureService {
   };
 
   editAdventure = async (adventure) => {
-    console.log("SERVICE", adventure);
-    console.log("id, ", adventure._id);
     try {
       const updatedAdventure = await Adventure.findByIdAndUpdate(
         adventure._id,
@@ -64,7 +62,6 @@ export default class AdventureService {
         },
         { new: true }
       );
-      console.log(updatedAdventure);
       return updatedAdventure;
     } catch (error) {
       throw new Error(
