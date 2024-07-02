@@ -25,7 +25,6 @@ export default class AuthService {
   };
 
   login = async (user) => {
-    // try {
     const dbUser = await User.findOne({ email: user.email });
     if (!dbUser) {
       throw new Error("Invalid credentials.");
@@ -40,8 +39,5 @@ export default class AuthService {
       expiresIn: 86400,
     });
     return { accessToken, dbUser };
-    // } catch (error) {
-    //   throw new Error("An error ocurred during the login process.");
-    // }
   };
 }

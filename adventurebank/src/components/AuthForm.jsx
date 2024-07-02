@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { login, register } from "../utils/auth.services";
 import { isEmailValid, isPasswordValid } from "../utils/validation.services";
 
-const AuthForm = ({ isLoggingIn, setHasCookie }) => {
+const AuthForm = ({ isLoggingIn, setHasCookie, setIsAdmin }) => {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -46,11 +46,16 @@ const AuthForm = ({ isLoggingIn, setHasCookie }) => {
     }));
   };
 
+  const checkForAdminRole = (data, setIsAdmin) => {
+    if (data.dbUser.role === "admin") setIsAdmin(true);
+  };
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
       if (isLoggingIn) {
-        await login({ email, password });
+        const data = await login({ email, password });
+        checkForAdminRole(data, setIsAdmin);
       } else {
         await register({ username, email, password });
       }

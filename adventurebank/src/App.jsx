@@ -36,7 +36,7 @@ function App() {
             hasCookie ? (
               <Navigate to="/" />
             ) : (
-              <Auth setHasCookie={setHasCookie} />
+              <Auth setHasCookie={setHasCookie} setIsAdmin={setIsAdmin} />
             )
           }
         />
