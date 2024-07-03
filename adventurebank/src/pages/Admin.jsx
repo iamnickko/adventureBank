@@ -14,11 +14,11 @@ const Admin = ({ isAdmin }) => {
     };
     if (!isAdmin) return;
     fetchAllUsers();
-  }, []);
+  }, [allUsers]);
 
   return (
     <>
-      <h1 className="text-center text-3xl my-4">All Users</h1>
+      <h1 className="text-center text-5xl pb-6 pt-4">All Users</h1>
       {isLoading && <p>Loading data...</p>}
       {allUsers.map((user) => (
         <Card key={user._id}>
