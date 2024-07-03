@@ -3,10 +3,10 @@ import User from "../models/User.model.js";
 export default class AdminService {
   getAllUsers = async () => {
     try {
-      const allUsers = await User.find({})
-        .populate("adventures")
-        .populate("gear")
-        .exec();
+      const allUsers = await User.find({});
+      // .populate("adventures")
+      // .populate("gear")
+      // .exec();
       if (!allUsers) {
         throw new Error("There are no users to display.");
       }

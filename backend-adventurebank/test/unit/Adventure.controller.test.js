@@ -10,7 +10,7 @@ const testAdventures = [
   { _id: 2, name: "def", description: "123" },
 ];
 
-describe.skip("AdventureController tests", () => {
+describe("AdventureController tests", () => {
   let adventureController;
   let adventureService;
   let req;
@@ -21,6 +21,7 @@ describe.skip("AdventureController tests", () => {
       createAdventure: sinon.stub(),
       getAllAdventures: sinon.stub(),
       deleteAdventure: sinon.stub(),
+      getOneAdventure: sinon.stub(),
     };
     adventureController = new AdventureController(adventureService);
     req = {
@@ -110,6 +111,40 @@ describe.skip("AdventureController tests", () => {
         .withArgs(adventureId)
         .rejects(new Error(errorMessage));
       await adventureController.deleteAdventure(req, res);
+      expect(res.json.calledWith({ message: errorMessage })).to.be.true;
+    });
+  });
+
+  describe("getOneAdventure tests", () => {
+    let adventure;
+
+    beforeEach(() => {
+      adventure = testAdventures[0];
+      req.params = { id: adventure._id };
+    });
+
+    it("should return a 200 status code", async () => {
+      adventureService.getOneAdventure
+        .withArgs(adventure._id)
+        .resolves(adventure);
+      await adventureController.getOneAdventure(req, res);
+      expect(res.status.calledWith(200)).to.be.true;
+    });
+
+    it("should respond with a 500 status code when getOneAdventure fails", async () => {
+      adventureService.getOneAdventure
+        .withArgs(adventure._id)
+        .rejects(new Error("fail"));
+      await adventureController.getOneAdventure(req, res);
+      expect(res.status.calledWith(500)).to.be.true;
+    });
+
+    it("should respond with an error message when getOneAdventure fails", async () => {
+      const errorMessage = "failed to find biscuits!";
+      adventureService.getOneAdventure
+        .withArgs(adventure._id)
+        .rejects(new Error(errorMessage));
+      await adventureController.getOneAdventure(req, res);
       expect(res.json.calledWith({ message: errorMessage })).to.be.true;
     });
   });
