@@ -23,7 +23,7 @@ const GearList = ({ allGear, fetchAllGear }) => {
               <p>{gear.description}</p>
             </span>
             <span className="sm:flex sm:justify-center gap-3">
-              <button>Edit</button>
+              {/* <button>Edit</button> */}
               <button
                 onClick={async () => {
                   await deleteGear(gear._id);
