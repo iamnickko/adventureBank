@@ -165,4 +165,27 @@ describe("AdventureService tests", () => {
       }
     });
   });
+
+  describe("editAdventure tests", () => {
+    it("should return the updated adventure object", async () => {
+      const updated = await adventureService.editAdventure(
+        mockDBUpdatedAdventure2
+      );
+      expect(updated).to.equal(mockDBUpdatedAdventure2);
+    });
+
+    it("should return an error if editAdventure fails", async () => {
+      editAdventureStub.rejects(new Error());
+      try {
+        await adventureService.editAdventure(mockDBUpdatedAdventure2);
+        expect.fail(
+          "An unexpected error occurred whilst trying to edit the adventure."
+        );
+      } catch (error) {
+        expect(error.message).to.equal(
+          "An unexpected error occurred whilst trying to edit the adventure."
+        );
+      }
+    });
+  });
 });
