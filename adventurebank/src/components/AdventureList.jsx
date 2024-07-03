@@ -13,13 +13,13 @@ const AdventureList = ({ allAdventures, fetchAllAdventures }) => {
         </p>
       )}
       {allAdventures.map((adventure) => (
-        <Card key={adventure._id}>
+        <Card className={"p-5"} key={adventure._id}>
           <article className="flex justify-between items-center">
             <span>
               <header>
-                <h3>{adventure.name}</h3>
+                <h3 className="text-lg font-semibold">{adventure.name}</h3>
               </header>
-              <p>{adventure.description}</p>
+              <p className="text-gray-700">{adventure.description}</p>
             </span>
             <span className="sm:flex sm:justify-center gap-3 items-center">
               <Link to={`/adventures/${adventure._id}`}>Edit</Link>

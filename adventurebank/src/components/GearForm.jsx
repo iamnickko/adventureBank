@@ -59,7 +59,7 @@ const GearForm = ({ onSubmitCreate }) => {
   };
 
   return (
-    <Card className="max-w-md mx-auto">
+    <Card className="max-w-md mx-auto p-5">
       <form onSubmit={onSubmitHandler} className="grid grid-cols-1 gap-6 mb-5">
         <label htmlFor="name" className="block">
           <span className="text-gray-700">Gear Name</span>
@@ -80,10 +80,10 @@ const GearForm = ({ onSubmitCreate }) => {
             {formError.name}
           </p>
         )}
-        <label htmlFor="category-select">
+        <label className="text-gray-700" htmlFor="category-select">
           Choose a Category:
           <select
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="text-gray-700 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             name="category"
             id="category-select"
             required

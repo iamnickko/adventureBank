@@ -13,14 +13,16 @@ const GearList = ({ allGear, fetchAllGear }) => {
         </p>
       )}
       {allGear.map((gear) => (
-        <Card key={gear._id}>
+        <Card className={"p-5"} key={gear._id}>
           <article className="flex justify-between items-center">
             <span>
               <header>
-                <h3>{gear.name}</h3>
+                <h3 className="text-lg font-semibold">{gear.name}</h3>
               </header>
-              <p>{gear.category}</p>
-              <p>{gear.description}</p>
+              <p className="text-gray-500 py-1 uppercase text-sm font-semibold">
+                {gear.category}
+              </p>
+              <p className="text-gray-700">{gear.description}</p>
             </span>
             <span className="sm:flex sm:justify-center gap-3">
               {/* <button>Edit</button> */}

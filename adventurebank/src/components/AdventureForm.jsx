@@ -69,7 +69,7 @@ const AdventureForm = ({ handleSubmit, adventureData, mode }) => {
   };
 
   return (
-    <Card className="max-w-md mx-auto">
+    <Card className="max-w-md mx-auto p-5">
       <form onSubmit={onSubmitHandler} className="grid grid-cols-1 gap-6 mb-5">
         <label htmlFor="name" className="block">
           <span className="text-gray-700">Name Your Adventure</span>
