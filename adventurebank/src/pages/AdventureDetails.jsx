@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import AdventureForm from "../components/AdventureForm";
 import { editAdventure, getOneAdventure } from "../utils/adventure.services";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AdventureDetails = () => {
+  const navigate = useNavigate();
   const [adventure, setAdventure] = useState({});
 
   const { id } = useParams();
@@ -17,6 +18,7 @@ const AdventureDetails = () => {
 
   const onSubmitEdit = async (formObject) => {
     await editAdventure(formObject);
+    navigate("/adventures");
   };
 
   return (
