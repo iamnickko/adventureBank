@@ -43,36 +43,4 @@ describe("AdventureDetails page tests", () => {
     expect(nameInput.value).toBe(mockAdventure.name);
     expect(screen.getByText(mockAdventure.description)).toBeInTheDocument();
   });
-
-  //   it("should call editAdventure with correct form object on form submission", async () => {
-  //     adventureServices.editAdventure.mockResolvedValue(updatedAdventure);
-
-  //     const router = createMemoryRouter(
-  //       [
-  //         {
-  //           path: "adventures/:id",
-  //           element: <AdventureDetails />,
-  //         },
-  //       ],
-  //       {
-  //         initialEntries: ["/adventures/1"],
-  //       }
-  //     );
-
-  //     render(<RouterProvider router={router} />);
-
-  //     const descriptionInput = await screen.findByLabelText("Description");
-  //     const submitButton = screen.getByRole("button", { name: "Edit Adventure" });
-
-  //     await userEvent.type(
-  //       descriptionInput,
-  //       "No longer as we found a packet of biscuits"
-  //     );
-  //     await userEvent.click(submitButton);
-
-  //     expect(adventureServices.editAdventure).toHaveBeenCalledWith({
-  //       ...mockAdventure,
-  //       description: "No longer as we found a packet of biscuits",
-  //     });
-  //   });
 });
