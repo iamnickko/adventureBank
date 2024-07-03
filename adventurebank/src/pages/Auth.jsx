@@ -7,7 +7,7 @@ const Auth = ({ setHasCookie, setIsAdmin }) => {
 
   return (
     <>
-      <h1 className="text-3xl text-center">
+      <h1 className="text-5xl pb-6 pt-4 text-center">
         {isLoggingIn ? "Login" : "Register"}
       </h1>
       <AuthForm

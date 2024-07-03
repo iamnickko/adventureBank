@@ -26,7 +26,7 @@ const Gear = ({ hasCookie }) => {
 
   return (
     <>
-      <h2 className="text-5xl text-center">Your Gear</h2>
+      <h2 className="text-5xl pb-6 pt-4 text-center">Your Gear</h2>
       <br />
       <br />
       <div className="lg:grid lg:grid-cols-3 lg:gap-3">
