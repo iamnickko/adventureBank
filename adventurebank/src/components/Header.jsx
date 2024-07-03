@@ -11,25 +11,51 @@ const Header = ({ hasCookie, setHasCookie, isAdmin, setIsAdmin }) => {
   };
 
   return (
-    <header className="pb-7">
+    <header className="pb-3 mb-5 text-xl border-b-2">
       <nav className="flex justify-between">
         <span>
           <ul className="flex gap-7">
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-lime-400/75 underline" : ""
+                }
+                to="/"
+              >
+                Home
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/adventures">Adventures</NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-lime-400/75 underline" : ""
+                }
+                to="/adventures"
+              >
+                Adventures
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/gear">Gear</NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-lime-400/75 underline" : ""
+                }
+                to="/gear"
+              >
+                Gear
+              </NavLink>
             </li>
           </ul>
         </span>
         {hasCookie && (
           <span>
             {hasCookie && isAdmin && (
-              <NavLink className="mr-5" to="/admin">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-lime-400/75 underline mr-5" : "mr-5"
+                }
+                to="/admin"
+              >
                 Admin
               </NavLink>
             )}
