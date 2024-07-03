@@ -76,7 +76,7 @@ const GearForm = ({ onSubmitCreate }) => {
           />
         </label>
         {formError.name && (
-          <p className="bg-red-300 text-center mx-auto rounded-3xl py-2 w-5/6">
+          <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
             {formError.name}
           </p>
         )}
@@ -119,13 +119,13 @@ const GearForm = ({ onSubmitCreate }) => {
           />
         </label>
         {formError.description && (
-          <p className="bg-red-300 text-center mx-auto rounded-3xl py-2 w-5/6">
+          <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
             {formError.description}
           </p>
         )}
         <button
           disabled={btnIsDisabled}
-          className="mx-auto w-1/3 py-2 border-2 border-lime-400 bg-lime-200/50 rounded-full hover:bg-lime-400/50 active:bg-lime-600/50 focus:outline-none focus:ring focus:ring-lime-300 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed"
+          className="mx-auto w-2/5 py-2 border-2 border-lime-400 bg-lime-200/50 rounded-full hover:bg-lime-400/50 active:bg-lime-600/50 focus:outline-none focus:ring focus:ring-lime-300 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed"
         >
           Add Gear
         </button>

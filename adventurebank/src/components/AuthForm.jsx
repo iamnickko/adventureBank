@@ -99,7 +99,7 @@ const AuthForm = ({ isLoggingIn, setHasCookie, setIsAdmin }) => {
             onBlur={validateEmail}
           />
           {formError.email && (
-            <p className="bg-red-300 text-center mx-auto rounded-3xl py-2 w-full">
+            <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
               {formError.email}
             </p>
           )}
@@ -118,7 +118,7 @@ const AuthForm = ({ isLoggingIn, setHasCookie, setIsAdmin }) => {
             onBlur={validatePassword}
           />
           {formError.password && (
-            <p className="bg-red-300 text-center mx-auto rounded-3xl py-2 w-full">
+            <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
               {formError.password}
             </p>
           )}
@@ -132,7 +132,7 @@ const AuthForm = ({ isLoggingIn, setHasCookie, setIsAdmin }) => {
           {isLoggingIn ? "Login" : "Register"}
         </button>
         {error && (
-          <p className="bg-red-300 text-center mx-auto rounded-3xl py-2 w-5/6">
+          <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
             {error}
           </p>
         )}
