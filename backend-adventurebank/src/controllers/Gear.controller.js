@@ -22,7 +22,7 @@ export default class GearController {
       const allGear = await this.#service.getAllGear(req.userId);
       res.status(200).json(allGear);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(500).json({ message: error.message });
     }
   };
 
