@@ -21,16 +21,16 @@ const Admin = ({ isAdmin }) => {
       <h1 className="text-center text-5xl pb-6 pt-4">All Users</h1>
       {isLoading && <p>Loading data...</p>}
       {allUsers.map((user) => (
-        <Card key={user._id}>
+        <Card className={"p-5"} key={user._id}>
           <article className="flex justify-between items-center">
             <span>
-              <p>{user.username}</p>
+              <p className="text-lg font-semibold">{user.username}</p>
               <p>{user.email}</p>
             </span>
-            <span>
+            {/* <span>
               <p>#Adventures: {user.adventures.length}</p>
               <p>#Gear: {user.adventures.length}</p>
-            </span>
+            </span> */}
             <span>
               <p>Created: {user.createdAt}</p>
               <p>Updated: {user.updatedAt}</p>
