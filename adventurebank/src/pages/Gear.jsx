@@ -25,18 +25,23 @@ const Gear = ({ hasCookie }) => {
   }, []);
 
   return (
-    <div className="lg:grid lg:grid-cols-3 lg:gap-3">
-      <span className="lg:col-span-2">
-        {isLoading ? (
-          <p>Loading Gear...</p>
-        ) : (
-          <GearList allGear={allGear} fetchAllGear={fetchAllGear} />
-        )}
-      </span>
-      <span>
-        <GearForm onSubmitCreate={onSubmitCreateHandler} />
-      </span>
-    </div>
+    <>
+      <h2 className="text-5xl text-center">Your Gear</h2>
+      <br />
+      <br />
+      <div className="lg:grid lg:grid-cols-3 lg:gap-3">
+        <span className="lg:col-span-2">
+          {isLoading ? (
+            <p>Loading Gear...</p>
+          ) : (
+            <GearList allGear={allGear} fetchAllGear={fetchAllGear} />
+          )}
+        </span>
+        <span>
+          <GearForm onSubmitCreate={onSubmitCreateHandler} />
+        </span>
+      </div>
+    </>
   );
 };
 export default Gear;

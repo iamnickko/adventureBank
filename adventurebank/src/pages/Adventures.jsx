@@ -27,21 +27,26 @@ const Adventures = ({ hasCookie }) => {
   }, []);
 
   return (
-    <div className="lg:grid lg:grid-cols-3 lg:gap-3">
-      <span className="lg:col-span-2">
-        {isLoading ? (
-          <p>Loading adventures...</p>
-        ) : (
-          <AdventureList
-            allAdventures={allAdventures}
-            fetchAllAdventures={fetchAllAdventures}
-          />
-        )}
-      </span>
-      <span>
-        <AdventureForm handleSubmit={onSubmitCreateHandler} />
-      </span>
-    </div>
+    <>
+      <h2 className="text-5xl text-center">Your Adventures</h2>
+      <br />
+      <br />
+      <div className="lg:grid lg:grid-cols-3 lg:gap-3">
+        <span className="lg:col-span-2">
+          {isLoading ? (
+            <p>Loading adventures...</p>
+          ) : (
+            <AdventureList
+              allAdventures={allAdventures}
+              fetchAllAdventures={fetchAllAdventures}
+            />
+          )}
+        </span>
+        <span>
+          <AdventureForm handleSubmit={onSubmitCreateHandler} />
+        </span>
+      </div>
+    </>
   );
 };
 export default Adventures;
