@@ -9,9 +9,12 @@ describe("AdventureService tests", () => {
   let adventureService;
   let createAdventureStub;
   let findAdventuresStub;
+  let findOneAdventureStub;
   let deleteAdventureStub;
+  let editAdventureStub;
   let mockDBAdventure;
   let mockDBAdventure2;
+  let mockDBUpdatedAdventure2;
   let adventureArray;
 
   before(() => {
@@ -30,11 +33,22 @@ describe("AdventureService tests", () => {
       name: "Homeward Bound",
       description: "A bunch of pupper dogs head home",
     };
+    mockDBUpdatedAdventure2 = {
+      _id: 2,
+      name: "Homeward Bound",
+      description: "they made it home in time for biscuits",
+    };
     adventureArray = [mockDBAdventure, mockDBAdventure2];
     createAdventureStub = sinon
       .stub(Adventure, "create")
       .resolves(mockDBAdventure);
     findAdventuresStub = sinon.stub(Adventure, "find").resolves(adventureArray);
+    findOneAdventureStub = sinon
+      .stub(Adventure, "findById")
+      .resolves(mockDBAdventure2);
+    editAdventureStub = sinon
+      .stub(Adventure, "findByIdAndUpdate")
+      .resolves(mockDBUpdatedAdventure2);
     deleteAdventureStub = sinon
       .stub(Adventure, "findByIdAndDelete")
       .resolves(mockDBAdventure2);
@@ -43,7 +57,9 @@ describe("AdventureService tests", () => {
   afterEach(() => {
     createAdventureStub.restore();
     findAdventuresStub.restore();
+    findOneAdventureStub.restore();
     deleteAdventureStub.restore();
+    editAdventureStub.restore();
   });
 
   describe("createAdventure tests", () => {
@@ -122,6 +138,29 @@ describe("AdventureService tests", () => {
       } catch (error) {
         expect(error.message).to.equal(
           "An unexpected error occurred whilst trying to delete the adventure."
+        );
+      }
+    });
+  });
+
+  describe("getOneAdventure tests", () => {
+    it("should return the one adventure object", async () => {
+      const findOne = await adventureService.getOneAdventure(
+        mockDBAdventure2._id
+      );
+      expect(findOne).to.equal(mockDBAdventure2);
+    });
+
+    it("should throw an error if getOneAdventure fails", async () => {
+      findOneAdventureStub.rejects(new Error());
+      try {
+        await adventureService.getOneAdventure(mockDBAdventure2._id);
+        expect.fail(
+          "An unexpected error occurred whilst searching for this adventure."
+        );
+      } catch (error) {
+        expect(error.message).to.equal(
+          "An unexpected error occurred whilst searching for this adventure."
         );
       }
     });
