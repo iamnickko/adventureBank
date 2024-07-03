@@ -18,33 +18,37 @@ const Header = ({ hasCookie, setHasCookie, isAdmin, setIsAdmin }) => {
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? "text-lime-400/75 underline" : ""
+                  isActive ? "text-whiskey" : "text-neutral-400"
                 }
                 to="/"
               >
                 Home
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "text-lime-400/75 underline" : ""
-                }
-                to="/adventures"
-              >
-                Adventures
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "text-lime-400/75 underline" : ""
-                }
-                to="/gear"
-              >
-                Gear
-              </NavLink>
-            </li>
+            {hasCookie && (
+              <>
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "text-whiskey" : "text-neutral-400"
+                    }
+                    to="/adventures"
+                  >
+                    Adventures
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "text-whiskey" : "text-neutral-400"
+                    }
+                    to="/gear"
+                  >
+                    Gear
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </span>
         {hasCookie && (
@@ -52,14 +56,16 @@ const Header = ({ hasCookie, setHasCookie, isAdmin, setIsAdmin }) => {
             {hasCookie && isAdmin && (
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? "text-lime-400/75 underline mr-5" : "mr-5"
+                  isActive ? "text-whiskey mr-5" : "text-neutral-400 mr-5"
                 }
                 to="/admin"
               >
                 Admin
               </NavLink>
             )}
-            <button onClick={onClickHandler}>Logout</button>
+            <button className="text-neutral-400" onClick={onClickHandler}>
+              Logout
+            </button>
           </span>
         )}
 

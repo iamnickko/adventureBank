@@ -27,12 +27,12 @@ const Home = () => {
             alt="well organised gear"
           />
           <br />
-          <p>...so it's easy to pack it like this!</p>
+          <p>...so it's easy to pack like this!</p>
         </span>
       </div>
       <br />
-      <hr className="border-2 my-5 border-lime-200/50" />
-      <h3 className="text-2xl pt-5">Get Started</h3>
+      <hr className="border-b-2 my-5 border-whiskey/50" />
+      <h3 className="text-3xl pt-5">Get Started</h3>
       <br />
       <br />
       <span className="flex justify-center gap-10">
