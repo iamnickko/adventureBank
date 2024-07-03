@@ -8,9 +8,11 @@ const GearList = ({ allGear, fetchAllGear }) => {
   return (
     <>
       {allGear.length === 0 && (
-        <p className="text-center mb-5">
-          You have no gear - Let's create some!
-        </p>
+        <div className="text-center mx-auto w-3/5 p-5 my-5 border border-whiskey shadow-lg rounded-lg bg-whiskey/10">
+          <p className="text-xl mb-3 text-whiskey font-semibold">
+            You have no gear - Let's create some!
+          </p>
+        </div>
       )}
       {allGear.map((gear) => (
         <Card className={"p-5"} key={gear._id}>

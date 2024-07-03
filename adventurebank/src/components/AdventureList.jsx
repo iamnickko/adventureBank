@@ -8,9 +8,11 @@ const AdventureList = ({ allAdventures, fetchAllAdventures }) => {
   return (
     <>
       {allAdventures.length === 0 && (
-        <p className="text-center mb-5">
-          You have no adventures - Let's create one!
-        </p>
+        <div className="text-center mx-auto w-3/5 p-5 my-5 border border-whiskey shadow-lg rounded-lg bg-whiskey/10">
+          <p className="text-xl mb-3 text-whiskey font-semibold">
+            You have no adventures - Let's create one!
+          </p>
+        </div>
       )}
       {allAdventures.map((adventure) => (
         <Card className={"p-5"} key={adventure._id}>
