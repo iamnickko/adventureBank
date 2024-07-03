@@ -97,4 +97,34 @@ describe("GearController tests", () => {
       expect(res.json.calledWith({ message: errorMessage })).to.be.true;
     });
   });
+
+  describe("deleteGear tests", () => {
+    let adventure;
+
+    beforeEach(() => {
+      adventure = testGear[0];
+      req.params = { id: adventure._id };
+    });
+
+    it("should return a 200 status code", async () => {
+      gearService.deleteGear.withArgs(adventure._id).resolves(adventure);
+      await gearController.deleteGear(req, res);
+      expect(res.status.calledWith(200)).to.be.true;
+    });
+
+    it("should respond with a 500 status code if deleteGear fails", async () => {
+      gearService.deleteGear.withArgs(adventure._id).rejects(new Error());
+      await gearController.deleteGear(req, res);
+      expect(res.status.calledWith(500)).to.be.true;
+    });
+
+    it("should respond with an error message if deleteGear fails", async () => {
+      const errorMessage = "MORE BISCUITS!";
+      gearService.deleteGear
+        .withArgs(adventure._id)
+        .rejects(new Error(errorMessage));
+      await gearController.deleteGear(req, res);
+      expect(res.json.calledWith({ message: errorMessage })).to.be.true;
+    });
+  });
 });
