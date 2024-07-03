@@ -19,6 +19,8 @@ const Admin = ({ isAdmin }) => {
   return (
     <>
       <h1 className="text-center text-5xl pb-6 pt-4">All Users</h1>
+      <br />
+      <br />
       {isLoading && <p>Loading data...</p>}
       {allUsers.map((user) => (
         <Card className={"p-5"} key={user._id}>
