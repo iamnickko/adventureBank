@@ -2,7 +2,11 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        whiskey: "#8B572A",
+      },
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 };

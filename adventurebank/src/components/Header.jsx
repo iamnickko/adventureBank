@@ -11,7 +11,7 @@ const Header = ({ hasCookie, setHasCookie, isAdmin, setIsAdmin }) => {
   };
 
   return (
-    <header className="pb-3 mb-5 text-xl border-b-2">
+    <header className="pb-3 mb-5 text-xl border-b-2 border-whiskey/50">
       <nav className="flex justify-between">
         <span>
           <ul className="flex gap-7">
