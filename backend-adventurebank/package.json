@@ -5,12 +5,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "prod": "node src/index.js",
     "start": "NODE_ENV=dev nodemon src/index.js",
     "start-win": "SET NODE_ENV=dev&&nodemon src/index.js",
     "test": "NODE_ENV=test mocha --timeout 10000 --exit --recursive",
     "test-win": "SET NODE_ENV=test&&mocha --timeout 10000 --exit --recursive",
     "coverage": "NODE_ENV=test c8 -r html npm test",
-    "coverage-win": "SET NODE_ENV=test&&c8 -r html npm run test-win"
+    "coverage-win": "SET NODE_ENV=test&&c8 -r html npm run test-win",
+    "build": "echo 'No build step required for deployment'"
   },
   "author": "Nick Ko",
   "license": "ISC",
