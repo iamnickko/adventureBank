@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ hasCookie }) => {
   return (
     <div className="text-center">
       <h1 className="text-5xl pb-6 pt-4">AdventureBank</h1>
@@ -32,23 +32,27 @@ const Home = () => {
       </div>
       <br />
       <hr className="border-b-2 my-5 border-whiskey/50" />
-      <h3 className="text-3xl pt-5">Get Started</h3>
-      <br />
-      <br />
-      <span className="flex justify-center gap-10">
-        <Link
-          to={"/auth?mode=register"}
-          className="w-1/3 py-2 border-2 border-lime-400 bg-lime-200/50 rounded-full hover:bg-lime-400/50 active:bg-lime-600/50 focus:outline-none focus:ring focus:ring-lime-300"
-        >
-          Register
-        </Link>
-        <Link
-          to={"/auth?mode=login"}
-          className="w-1/3 py-2 border-2 border-lime-400 bg-lime-200/50 rounded-full hover:bg-lime-400/50 active:bg-lime-600/50 focus:outline-none focus:ring focus:ring-lime-300"
-        >
-          Login
-        </Link>
-      </span>
+      {!hasCookie && (
+        <>
+          <h3 className="text-3xl pt-5">Get Started</h3>
+          <br />
+          <br />
+          <span className="flex justify-center gap-10">
+            <Link
+              to={"/auth?mode=register"}
+              className="w-1/3 py-2 border-2 border-lime-400 bg-lime-200/50 rounded-full hover:bg-lime-400/50 active:bg-lime-600/50 focus:outline-none focus:ring focus:ring-lime-300"
+            >
+              Register
+            </Link>
+            <Link
+              to={"/auth?mode=login"}
+              className="w-1/3 py-2 border-2 border-lime-400 bg-lime-200/50 rounded-full hover:bg-lime-400/50 active:bg-lime-600/50 focus:outline-none focus:ring focus:ring-lime-300"
+            >
+              Login
+            </Link>
+          </span>
+        </>
+      )}
     </div>
   );
 };

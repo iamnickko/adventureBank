@@ -30,7 +30,7 @@ function App() {
         setIsAdmin={setIsAdmin}
       />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home hasCookie={hasCookie} />} />
         <Route
           path="/auth"
           element={
