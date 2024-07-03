@@ -15,18 +15,17 @@ const GearForm = ({ onSubmitCreate }) => {
   const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
-    if (name && description) {
+    if (name && description && category) {
       setBtnIsDisabled(false);
     } else {
       setBtnIsDisabled(true);
     }
     setFormError({});
     setSubmitError("");
-  }, [name, description]);
+  }, [name, description, category]);
 
   const validateName = () => {
     const nameValid = isNameInputValid(name);
-    setBtnIsDisabled(!nameValid);
     setFormError((prevErrors) => ({
       ...prevErrors,
       name: nameValid
@@ -36,7 +35,6 @@ const GearForm = ({ onSubmitCreate }) => {
   };
   const validateDescription = () => {
     const descriptionValid = isDescriptionValid(description);
-    setBtnIsDisabled(!descriptionValid);
     setFormError((prevErrors) => ({
       ...prevErrors,
       description: descriptionValid
@@ -54,7 +52,6 @@ const GearForm = ({ onSubmitCreate }) => {
       setDescription("");
     } catch (error) {
       setSubmitError(error.message);
-      setBtnIsDisabled(false);
     }
   };
 
@@ -129,7 +126,11 @@ const GearForm = ({ onSubmitCreate }) => {
         >
           Add Gear
         </button>
-        {submitError && <p>{submitError}</p>}
+        {submitError && (
+          <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
+            {submitError}
+          </p>
+        )}
       </form>
     </Card>
   );

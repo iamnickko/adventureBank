@@ -12,5 +12,14 @@ export default defineConfig({
     setupFiles: ["./tests/setup.js"],
     testMatch: ["./tests/**/*.test.jsx$?"],
     globals: true,
+    coverage: {
+      exclude: [
+        "src/App.jsx",
+        "src/main.jsx",
+        ".eslintrc.cjs",
+        "postcss.config.js",
+        "tailwind.config.js",
+      ],
+    },
   },
 });

@@ -32,7 +32,6 @@ const AdventureForm = ({ handleSubmit, adventureData, mode }) => {
 
   const validateName = () => {
     const nameValid = isNameInputValid(name);
-    setBtnIsDisabled(!nameValid);
     setFormError((prevErrors) => ({
       ...prevErrors,
       name: nameValid
@@ -43,7 +42,6 @@ const AdventureForm = ({ handleSubmit, adventureData, mode }) => {
 
   const validateDescription = () => {
     const descriptionValid = isDescriptionValid(description);
-    setBtnIsDisabled(!descriptionValid);
     setFormError((prevErrors) => ({
       ...prevErrors,
       description: descriptionValid
@@ -64,7 +62,7 @@ const AdventureForm = ({ handleSubmit, adventureData, mode }) => {
       setDescription("");
     } catch (error) {
       setSubmitError(error.message);
-      setBtnIsDisabled(false);
+      // setBtnIsDisabled(false);
     }
   };
 
@@ -115,7 +113,11 @@ const AdventureForm = ({ handleSubmit, adventureData, mode }) => {
         >
           {mode === "Edit" ? "Edit" : "Create"} Adventure
         </button>
-        {submitError && <p>{submitError}</p>}
+        {submitError && (
+          <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
+            {submitError}
+          </p>
+        )}
       </form>
     </Card>
   );
