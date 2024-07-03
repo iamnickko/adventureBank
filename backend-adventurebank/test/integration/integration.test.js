@@ -27,7 +27,7 @@ import Gear from "../../src/models/Gear.model.js";
 const { testUsers, newUser, existingUser, testAdventures, testGearItems } =
   testData;
 
-describe.skip("Integration Tests:", () => {
+describe("Integration Tests:", () => {
   let server;
   let database;
   let request;

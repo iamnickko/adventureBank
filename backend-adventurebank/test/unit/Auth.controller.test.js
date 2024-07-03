@@ -6,7 +6,7 @@ import testData from "../data/testData.js";
 
 const { testUsers, newUser, existingUser } = testData;
 
-describe.skip("AuthController tests", () => {
+describe("AuthController tests", () => {
   let authController;
   let authService;
   let req;

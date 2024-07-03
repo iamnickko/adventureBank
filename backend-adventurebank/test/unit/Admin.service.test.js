@@ -5,7 +5,7 @@ import AdminService from "../../src/services/Admin.service.js";
 import Config from "../../src/config/Config.js";
 import User from "../../src/models/User.model.js";
 
-describe.skip("AdminService tests", () => {
+describe("AdminService tests", () => {
   let adminService;
   let findUsersStub;
   let deleteUserStub;

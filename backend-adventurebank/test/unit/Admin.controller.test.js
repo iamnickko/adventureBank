@@ -10,7 +10,7 @@ const testUsers = [
   { _id: 2, name: "Jane Doe" },
 ];
 
-describe.skip("AdminController tests", () => {
+describe("AdminController tests", () => {
   let adminController;
   let adminService;
   let req;
