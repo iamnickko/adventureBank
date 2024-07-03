@@ -29,7 +29,7 @@ const renderScreen = () => {
   render(<RouterProvider router={router} />);
 };
 
-describe("AdventureList tests", () => {
+describe("Adventure tests", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
