@@ -22,6 +22,7 @@ describe("AdventureController tests", () => {
       getAllAdventures: sinon.stub(),
       deleteAdventure: sinon.stub(),
       getOneAdventure: sinon.stub(),
+      editAdventure: sinon.stub(),
     };
     adventureController = new AdventureController(adventureService);
     req = {
@@ -146,6 +147,41 @@ describe("AdventureController tests", () => {
         .rejects(new Error(errorMessage));
       await adventureController.getOneAdventure(req, res);
       expect(res.json.calledWith({ message: errorMessage })).to.be.true;
+    });
+
+    describe("editAdventure tests", () => {
+      let adventure;
+      let updatedAdventure;
+
+      beforeEach(() => {
+        adventure = testAdventures[0];
+        updatedAdventure = {
+          ...adventure,
+          name: "Updated",
+        };
+        req.params = { id: adventure._id };
+      });
+
+      it("should return a 200 status code", async () => {
+        adventureService.editAdventure
+          .withArgs(updatedAdventure)
+          .resolves(updatedAdventure);
+        await adventureController.editAdventure(req, res);
+        expect(res.status.calledWith(200)).to.be.true;
+      });
+
+      it("should return a 500 status code if editAdventure fails", async () => {
+        adventureService.editAdventure.rejects(new Error("it failed"));
+        await adventureController.editAdventure(req, res);
+        expect(res.status.calledWith(500)).to.be.true;
+      });
+
+      it("should return with an error message if editAdventure fails", async () => {
+        const errorMessage = "we're out of biscuits!";
+        adventureService.editAdventure.rejects(new Error(errorMessage));
+        await adventureController.editAdventure(req, res);
+        expect(res.json.calledWith({ message: errorMessage })).to.be.true;
+      });
     });
   });
 });
