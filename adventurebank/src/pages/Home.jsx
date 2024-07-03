@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div className="text-center">
-      <h1 className="text-5xl">AdventureBank</h1>
+      <h1 className="text-5xl pb-6 pt-4">AdventureBank</h1>
       <br />
-      <h2 className="text-xl">
+      <h2 className="text-xl pb-6">
         A virtual inventory of your gear at the ready for planning your next
         adventure
       </h2>
@@ -13,22 +13,26 @@ const Home = () => {
       <div className="grid md:grid-cols-2 gap-5 justify-items-center items-center">
         <span>
           <img
-            className="h-96"
+            className="h-96 rounded-lg drop-shadow-lg"
             src="/tidyStorage.png"
             alt="well organised gear"
           />
           <br />
-          <p>Organise your gear like this...</p>
+          <p>Organise your gear online like this...</p>
         </span>
         <span>
-          <img className="h-96" src="/tidyGear.JPG" alt="well organised gear" />
+          <img
+            className="h-96 rounded-lg drop-shadow-lg"
+            src="/tidyGear.JPG"
+            alt="well organised gear"
+          />
           <br />
-          <p>...so packing it feel like this</p>
+          <p>...so it's easy to pack it like this!</p>
         </span>
       </div>
       <br />
       <hr className="border-2 my-5 border-lime-200/50" />
-      <h3 className="text-2xl">Get Started</h3>
+      <h3 className="text-2xl pt-5">Get Started</h3>
       <br />
       <br />
       <span className="flex justify-center gap-10">
