@@ -1,4 +1,4 @@
-# AdventureBank /TrailMaster / TrailSeeker or something...
+# AdventureBank
 
 #### the WHAT
 Gear Inventory Management and Adventure Planning. Construct a packing checklist for your next adventure by creating a new 'adventure' and populate fields with your trusty existing gear. Add new items of gear to your inventory to be used.
@@ -16,7 +16,7 @@ This application will solve the problem of having to physically rummage around t
 
 Core Features:
 
-Ideally, anyone can create a list and add some gear (probably default standard values?) but will be required to register and have an account to save and build out their own inventory.
+Ideally, anyone can create a list and add some gear but will be required to register and have an account to save and build out their own inventory.
 
 The initial functionality will likely be centered around camping, but should be flexible enough to accommodate a wide range of outdoor pursuits.
 Add items of gear into a new adventure list to build a visual list of gear in the form of cards. Each card would have a title, perhaps an image (placeholders for now, user added images could be next iteration), and details of the item such as brand and it's purpose.
