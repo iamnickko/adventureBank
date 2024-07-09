@@ -2,7 +2,7 @@
 
 The link to the deployed application can be found here:
 
-[[https://adventure-bank.vercel.app/]]
+https://adventure-bank.vercel.app/
 
 Please note that the server is hosted on a free Render tier and may be slow to load initially.
 
