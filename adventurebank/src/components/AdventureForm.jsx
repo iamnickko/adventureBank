@@ -62,7 +62,6 @@ const AdventureForm = ({ handleSubmit, adventureData, mode }) => {
       setDescription("");
     } catch (error) {
       setSubmitError(error.message);
-      // setBtnIsDisabled(false);
     }
   };
 

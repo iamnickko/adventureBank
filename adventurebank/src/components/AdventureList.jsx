@@ -23,6 +23,7 @@ const AdventureList = ({ allAdventures, fetchAllAdventures }) => {
               </header>
               <p className="text-gray-700">{adventure.description}</p>
             </span>
+            {/* <p>{adventure.gearItems[0].name}</p> */}
             <span className="sm:flex sm:justify-center gap-3 items-center">
               <Link to={`/adventures/${adventure._id}`}>Edit</Link>
               <button

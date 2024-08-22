@@ -8,16 +8,34 @@ import Adventures from "./pages/Adventures";
 import Auth from "./pages/Auth";
 import AdventureDetails from "./pages/AdventureDetails";
 import Gear from "./pages/Gear";
+import { getAllAdventures } from "./utils/adventure.services";
+import { getAllGear } from "./utils/gear.services";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 
 function App() {
   const [hasCookie, setHasCookie] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [allGear, setAllGear] = useState([]);
+  const [allAdventures, setAllAdventures] = useState([]);
+
+  const fetchAllAdventures = async () => {
+    const data = await getAllAdventures();
+    setAllAdventures(data);
+    // setIsLoading(false);
+  };
+
+  const fetchAllGear = async () => {
+    const data = await getAllGear();
+    setAllGear(data);
+    // setIsLoading(false);
+  };
 
   useEffect(() => {
     if (checkForCookie()) {
       setHasCookie(true);
+      fetchAllAdventures();
+      fetchAllGear();
     }
   }, []);
 
@@ -49,7 +67,12 @@ function App() {
           path="/adventures"
           element={
             hasCookie ? (
-              <Adventures hasCookie={hasCookie} />
+              <Adventures
+                allAdventures={allAdventures}
+                allGear={allGear}
+                fetchAllAdventures={fetchAllAdventures}
+                fetchAllGear={fetchAllGear}
+              />
             ) : (
               <Navigate to="/" />
             )
@@ -62,7 +85,11 @@ function App() {
         <Route
           path="/gear"
           element={
-            hasCookie ? <Gear hasCookie={hasCookie} /> : <Navigate to="/" />
+            hasCookie ? (
+              <Gear allGear={allGear} fetchAllGear={fetchAllGear} />
+            ) : (
+              <Navigate to="/" />
+            )
           }
         />
       </Routes>

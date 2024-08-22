@@ -3,26 +3,26 @@ import { useEffect, useState } from "react";
 import { getAllGear, createGear } from "../utils/gear.services";
 import GearList from "../components/GearList";
 
-const Gear = ({ hasCookie }) => {
-  const [allGear, setAllGear] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+const Gear = ({ allGear, fetchAllGear }) => {
+  // const [allGear, setAllGear] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
 
-  const fetchAllGear = async () => {
-    const data = await getAllGear();
-    setAllGear(data);
-    setIsLoading(false);
-  };
+  // const fetchAllGear = async () => {
+  //   const data = await getAllGear();
+  //   setAllGear(data);
+  //   setIsLoading(false);
+  // };
 
   const onSubmitCreateHandler = async (name, category, description) => {
     await createGear({ name, category, description });
     await fetchAllGear();
   };
 
-  useEffect(() => {
-    if (hasCookie) {
-      fetchAllGear();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (hasCookie) {
+  //     fetchAllGear();
+  //   }
+  // }, []);
 
   return (
     <>
@@ -31,11 +31,11 @@ const Gear = ({ hasCookie }) => {
       <br />
       <div className="lg:grid lg:grid-cols-3 lg:gap-3">
         <span className="lg:col-span-2">
-          {isLoading ? (
+          {/* {isLoading ? (
             <p>Loading Gear...</p>
-          ) : (
-            <GearList allGear={allGear} fetchAllGear={fetchAllGear} />
-          )}
+          ) : ( */}
+          <GearList allGear={allGear} fetchAllGear={fetchAllGear} />
+          {/* )} */}
         </span>
         <span>
           <GearForm onSubmitCreate={onSubmitCreateHandler} />
