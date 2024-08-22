@@ -14,7 +14,9 @@ export default class AdventureService {
 
   getAllAdventures = async (userId) => {
     try {
-      const allAdventures = await Adventure.find({ userId });
+      const allAdventures = await Adventure.find({ userId }).populate(
+        "gearItems"
+      );
       if (!allAdventures) {
         throw new Error("There are no adventures to display.");
       }
