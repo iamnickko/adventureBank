@@ -31,11 +31,7 @@ const Adventures = ({
         </span>
       </div>
       <div>
-        <GearList
-          allGear={allGear}
-          fetchAllGear={fetchAllGear}
-          mode={"select"}
-        />
+        <GearList allGear={allGear} fetchAllGear={fetchAllGear} />
       </div>
     </>
   );

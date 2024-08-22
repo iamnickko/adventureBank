@@ -1,6 +1,6 @@
 import GearForm from "../components/GearForm";
 import { createGear } from "../utils/gear.services";
-import GearList from "../components/GearTable";
+import GearTable from "../components/GearTable";
 
 const Gear = ({ allGear, fetchAllGear }) => {
   const onSubmitCreateHandler = async (name, category, description) => {
@@ -15,7 +15,7 @@ const Gear = ({ allGear, fetchAllGear }) => {
       <br />
       <div className="lg:grid lg:grid-cols-3 lg:gap-3">
         <span className="lg:col-span-2">
-          <GearList allGear={allGear} fetchAllGear={fetchAllGear} />
+          <GearTable allGear={allGear} fetchAllGear={fetchAllGear} />
         </span>
         <span>
           <GearForm onSubmitCreate={onSubmitCreateHandler} />
