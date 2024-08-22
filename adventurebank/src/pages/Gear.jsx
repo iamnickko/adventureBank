@@ -1,6 +1,6 @@
 import GearForm from "../components/GearForm";
 import { createGear } from "../utils/gear.services";
-import GearList from "../components/GearList";
+import GearList from "../components/GearTable";
 
 const Gear = ({ allGear, fetchAllGear }) => {
   const onSubmitCreateHandler = async (name, category, description) => {

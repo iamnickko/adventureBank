@@ -1,7 +1,7 @@
 import AdventureForm from "../components/AdventureForm";
 import AdventureList from "../components/AdventureList";
 import { createAdventure } from "../utils/adventure.services";
-import GearList from "../components/GearList";
+import GearList from "../components/GearTable";
 
 const Adventures = ({
   allGear,
@@ -31,7 +31,11 @@ const Adventures = ({
         </span>
       </div>
       <div>
-        <GearList allGear={allGear} fetchAllGear={fetchAllGear} />
+        <GearList
+          allGear={allGear}
+          fetchAllGear={fetchAllGear}
+          mode={"select"}
+        />
       </div>
     </>
   );
