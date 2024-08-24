@@ -30,7 +30,9 @@ export default class AdventureService {
 
   getOneAdventure = async (adventureId) => {
     try {
-      const adventure = await Adventure.findById(adventureId);
+      const adventure = await Adventure.findById(adventureId).populate(
+        "gearItems"
+      );
       if (!adventure) {
         throw new Error("No such adventure exists.");
       }
