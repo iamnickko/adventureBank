@@ -70,64 +70,75 @@ const AdventureForm = ({ handleSubmit, adventureData, mode, allGear }) => {
   };
 
   return (
-    <Card className="max-w-md mx-auto p-5">
-      <form onSubmit={onSubmitHandler} className="grid grid-cols-1 gap-6 mb-5">
-        <label htmlFor="name" className="block">
-          <span className="text-gray-700">Name Your Adventure</span>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            maxLength="50"
-            placeholder="e.g. One can simply walk into Mordor"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            onBlur={validateName}
-          />
-        </label>
-        {formError.name && (
-          <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
-            {formError.name}
-          </p>
-        )}
-        <label htmlFor="description" className="block">
-          <span className="text-gray-700">Description</span>
-          <textarea
-            name="description"
-            id="description"
-            rows="10"
-            maxLength="400"
-            placeholder="Add some details to your adventure..."
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-            onBlur={validateDescription}
-          />
-        </label>
+    <>
+      <span className="grid grid-cols-2 gap-3">
+        <Card className="w-full mx-auto p-5">
+          <form
+            onSubmit={onSubmitHandler}
+            // className="grid grid-cols-1 gap-6 mb-5"
+          >
+            <label htmlFor="name" className="block">
+              <span className="text-gray-700">Name Your Adventure</span>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                maxLength="50"
+                placeholder="e.g. One can simply walk into Mordor"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                onBlur={validateName}
+              />
+            </label>
+            {formError.name && (
+              <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
+                {formError.name}
+              </p>
+            )}
+            <label htmlFor="description" className="block">
+              <span className="text-gray-700">Description</span>
+              <textarea
+                name="description"
+                id="description"
+                rows="10"
+                maxLength="400"
+                placeholder="Add some details to your adventure..."
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+                onBlur={validateDescription}
+              />
+            </label>
+            {formError.description && (
+              <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
+                {formError.description}
+              </p>
+            )}
+            <div className="flex justify-center pt-3">
+              <button
+                disabled={btnIsDisabled}
+                className="w-2/5 py-2 border-2 border-lime-400 bg-lime-200/50 rounded-full hover:bg-lime-400/50 active:bg-lime-600/50 focus:outline-none focus:ring focus:ring-lime-300 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed"
+              >
+                {mode === "Edit" ? "Edit" : "Create"} Adventure
+              </button>
+            </div>
+            {submitError && (
+              <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
+                {submitError}
+              </p>
+            )}
+          </form>
+        </Card>
+      </span>
+      <span>
         <GearTable
           allGear={allGear}
           selectedGear={selectedGear}
           setSelectedGear={setSelectedGear}
         />
-        {formError.description && (
-          <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
-            {formError.description}
-          </p>
-        )}
-        <button
-          disabled={btnIsDisabled}
-          className="mx-auto w-2/5 py-2 border-2 border-lime-400 bg-lime-200/50 rounded-full hover:bg-lime-400/50 active:bg-lime-600/50 focus:outline-none focus:ring focus:ring-lime-300 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed"
-        >
-          {mode === "Edit" ? "Edit" : "Create"} Adventure
-        </button>
-        {submitError && (
-          <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
-            {submitError}
-          </p>
-        )}
-      </form>
-    </Card>
+      </span>
+    </>
   );
 };
 export default AdventureForm;
