@@ -1,19 +1,29 @@
 import GearTableRow from "./GearTableRow";
 import Card from "./ui/Card";
-import { useNavigate } from "react-router-dom";
 
-const GearList = ({ allGear, fetchAllGear }) => {
-  const navigate = useNavigate();
-
+const GearTable = ({
+  allGear,
+  fetchAllGear,
+  selectedGear,
+  setSelectedGear,
+}) => {
+  if (!allGear)
+    return (
+      <div className="text-center mx-auto w-3/5 p-5 my-5 border border-whiskey shadow-lg rounded-lg bg-whiskey/10">
+        <p className="text-xl mb-3 text-whiskey font-semibold">
+          You have no gear - Let's create some!
+        </p>
+      </div>
+    );
   return (
     <>
-      {allGear.length === 0 && (
+      {/* {allGear.length === 0 && (
         <div className="text-center mx-auto w-3/5 p-5 my-5 border border-whiskey shadow-lg rounded-lg bg-whiskey/10">
           <p className="text-xl mb-3 text-whiskey font-semibold">
             You have no gear - Let's create some!
           </p>
         </div>
-      )}
+      )} */}
       <Card className={"p-5"}>
         <table className="">
           <thead className="text-gray-500 font-bold text-center border-b-2">
@@ -29,6 +39,8 @@ const GearList = ({ allGear, fetchAllGear }) => {
                 key={gear._id}
                 gear={gear}
                 fetchAllGear={fetchAllGear}
+                selectedGear={selectedGear}
+                setSelectedGear={setSelectedGear}
               />
             ))}
           </tbody>
@@ -37,4 +49,4 @@ const GearList = ({ allGear, fetchAllGear }) => {
     </>
   );
 };
-export default GearList;
+export default GearTable;
