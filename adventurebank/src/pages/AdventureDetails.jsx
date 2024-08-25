@@ -5,10 +5,9 @@ import { editAdventure, getOneAdventure } from "../utils/adventure.services";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAllGear } from "../utils/gear.services";
 
-const AdventureDetails = () => {
+const AdventureDetails = ({ allGear }) => {
   const navigate = useNavigate();
   const [adventure, setAdventure] = useState({});
-  const [allGear, setAllGear] = useState([]);
 
   const { id } = useParams();
   useEffect(() => {
@@ -18,15 +17,6 @@ const AdventureDetails = () => {
     };
     fetchOneAdventure(id);
   }, [id]);
-
-  //TODO change to fetch adventure's gear only
-  useEffect(() => {
-    const fetchAllGear = async () => {
-      const data = await getAllGear();
-      setAllGear(data);
-    };
-    fetchAllGear();
-  }, []);
 
   const onSubmitEdit = async (formObject) => {
     await editAdventure(formObject);
@@ -38,10 +28,10 @@ const AdventureDetails = () => {
       <h2 className="text-center mb-5 text-3xl">Edit Your Adventure</h2>
       <AdventureForm
         adventureData={adventure}
+        allGear={allGear}
         handleSubmit={onSubmitEdit}
         mode={"Edit"}
       />
-      <GearTable allGear={allGear} />
     </>
   );
 };
