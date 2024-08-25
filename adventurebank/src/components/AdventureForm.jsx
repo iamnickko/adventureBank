@@ -5,10 +5,12 @@ import {
   isDescriptionValid,
   isNameInputValid,
 } from "../utils/validation.services";
+import GearTable from "./GearTable";
 
-const AdventureForm = ({ handleSubmit, adventureData, mode }) => {
+const AdventureForm = ({ handleSubmit, adventureData, mode, allGear }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [selectedGear, setSelectedGear] = useState([]);
   const [btnIsDisabled, setBtnIsDisabled] = useState(true);
   const [formError, setFormError] = useState({ name: "", description: "" });
   const [submitError, setSubmitError] = useState("");
@@ -17,6 +19,7 @@ const AdventureForm = ({ handleSubmit, adventureData, mode }) => {
     if (adventureData) {
       setName(adventureData.name);
       setDescription(adventureData.description);
+      setSelectedGear(adventureData.gearItems || []);
     }
   }, [adventureData]);
 
@@ -57,6 +60,7 @@ const AdventureForm = ({ handleSubmit, adventureData, mode }) => {
         ...adventureData,
         name: name,
         description: description,
+        gearItems: selectedGear,
       });
       setName("");
       setDescription("");
@@ -101,6 +105,11 @@ const AdventureForm = ({ handleSubmit, adventureData, mode }) => {
             onBlur={validateDescription}
           />
         </label>
+        <GearTable
+          allGear={allGear}
+          selectedGear={selectedGear}
+          setSelectedGear={setSelectedGear}
+        />
         {formError.description && (
           <p className="text-red-700 border border-red-300 bg-red-50 text-center mx-auto rounded-xl py-2 my-2 w-full">
             {formError.description}
