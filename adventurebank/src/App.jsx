@@ -7,11 +7,13 @@ import Admin from "./pages/Admin";
 import Adventures from "./pages/Adventures";
 import Auth from "./pages/Auth";
 import AdventureDetails from "./pages/AdventureDetails";
+import { createAdventure } from "./utils/adventure.services";
 import Gear from "./pages/Gear";
 import { getAllAdventures } from "./utils/adventure.services";
 import { getAllGear } from "./utils/gear.services";
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import AdventureForm from "./components/AdventureForm";
 
 function App() {
   const [hasCookie, setHasCookie] = useState(false);
@@ -38,6 +40,11 @@ function App() {
       fetchAllGear();
     }
   }, []);
+
+  const onSubmitCreateHandler = async (formObject) => {
+    await createAdventure(formObject);
+    await fetchAllAdventures();
+  };
 
   return (
     <>
@@ -79,8 +86,23 @@ function App() {
           }
         />
         <Route
+          path="/adventures/new"
+          element={
+            <AdventureForm
+              handleSubmit={onSubmitCreateHandler}
+              allGear={allGear}
+            />
+          }
+        />
+        <Route
           path="/adventures/:id"
-          element={hasCookie ? <AdventureDetails /> : <Navigate to="/" />}
+          element={
+            hasCookie ? (
+              <AdventureDetails allGear={allGear} />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
         />
         <Route
           path="/gear"
